@@ -39,7 +39,7 @@ const CoverDetails = () => {
         }
     };
 
-    const pdfUrl = `https://cover-letter-mern-back.onrender.com/cover${coverId}.pdf`;
+    const pdfUrl = `https://cover-letter-mern-back.onrender.com/uploads/cover${coverId}.pdf`;
     const pdfName = `${coverId}.pdf`;
     const downloadFile = async () => {
       const result = await fetch(pdfUrl, { method: 'HEAD' });

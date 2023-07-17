@@ -27,7 +27,7 @@ const CoverDetails = () => {
     const handleClick = async () => {
         try {
           const response = await fetch(
-            `http://localhost:8080/api/v1/pdf/covers/${coverId}`,
+            `${process.env.REACT_APP_API_URL}/pdf/covers/${coverId}`,
           );
           const result = await fetch(url, { method: 'HEAD' });
             setMessage(response.status);
@@ -39,7 +39,7 @@ const CoverDetails = () => {
         }
     };
 
-    const pdfUrl = `http://localhost:8080/cover${coverId}.pdf`;
+    const pdfUrl = `https://cover-letter-mern-back.onrender.com/cover${coverId}.pdf`;
     const pdfName = `${coverId}.pdf`;
     const downloadFile = async () => {
       const result = await fetch(pdfUrl, { method: 'HEAD' });

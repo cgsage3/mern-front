@@ -11,12 +11,20 @@ export const CoverServices = api.injectEndpoints({
 
         getCover: build.query({
             query: (id) => ({
-                url: `covers/${coverName}`,
+                url: `covers/${id}`,
                 method: 'GET',
             }),
-            providesTags: (result, error, coverName) => [{ type: 'Covers', coverName }],
+            providesTags: (result, error, id) => [{ type: 'Covers', id }],
         }),
 
+        addCover: build.mutation({
+            query: (body) => ({
+                url: `covers`,
+                method: 'POST',
+                body,
+            }),
+            invalidatesTags: [{ type: 'Covers', id: 'LIST' }],
+        }),
     }),
 
 });

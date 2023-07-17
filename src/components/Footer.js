@@ -8,25 +8,24 @@ const Footer = () => {
                 <div className="row">
                     <p style={{ marginLeft: '30px', marginRight: '30px' }}>
                         <span style={{ textAlign: 'left', lineHeight: '60px' }}>
-                            ©2021{' '}
+                            ©2023{' '}
                             <a
-                                href="https://mernjs.github.io/create-mern-app"
+                                href="/"
                                 target="_blank"
                                 rel="noreferrer"
                             >
                                 {' '}
-                                Create MERN App
+                                Cover Letter App
                             </a>
                         </span>
                         <span style={{ float: 'right', lineHeight: '60px' }}>
                             <b>By:</b>{' '}
                             <a
-                                href="https://vijay-pratap-singh.netlify.app"
-                                target="_blank"
+                                href="/"
                                 rel="noreferrer"
                             >
                                 {' '}
-                                Vijay Pratap Singh
+                                Cesar Granda
                             </a>
                         </span>
                     </p>

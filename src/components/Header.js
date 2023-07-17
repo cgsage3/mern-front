@@ -18,7 +18,7 @@ const Header = () => {
                 <Navbar>
                     <Logo>
                         <Link to="/">
-                            <b>Create MERN App</b>
+                            <b>Cover Letter App</b>
                         </Link>
                     </Logo>
                     <ul>
@@ -37,6 +37,9 @@ const Header = () => {
                         )}
                         {user !== null && (
                             <>
+                                <li>
+                                    <Link to="/covers">Cover Letters</Link>
+                                </li>
                                 <li>
                                     <a
                                         onClick={logout}

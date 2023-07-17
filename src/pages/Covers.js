@@ -13,30 +13,31 @@ const Covers = () => {
     const navigate = useNavigate();
 
     const { data, isFetching } = useGetCoversQuery(page + 1);
-    console.log('data', page);
-    // const getUsers = () => {
-    // 	dispatch(api.endpoints.getUsers.initiate());
+    // console.log('data', page);
+    console.log(data);
+    // const getCovers = () => {
+    // 	dispatch(api.endpoints.getCovers.initiate());
     // };
 
     // useEffect(() => {
-    // 	getUsers();
+    // 	getCovers();
     // }, []);
 
     return (
         <>
             <ScrollView>
                 <Header />
-                <Container>
-                    <H2>Covers</H2>
+                <Container className="cl-wrapper">
+                    <H2>List of Cover Letters</H2>
                     {isFetching ? <div style={{ margin: '0 auto', width: '500px' }}><p>Loading...</p></div> :
                         <>
                             {data?.data?.docs.map((item, index) => {
-                                return <div key={index} onClick={() => navigate(`/users/${item._id}`)} style={{ padding: '10px', border: '2px solid gray', width: '500px', margin: '0 auto', marginBottom: '20px' }}>
-                                    <p><b>Name:</b> {item.name}</p>
-                                    <p><b>Email:</b> {item.email}</p>
+                                return <div key={index} onClick={() => navigate(`/covers/${item.coverName}`)} style={{ padding: '10px', border: '2px solid gray', width: '500px', margin: '0 auto', marginBottom: '20px' }}>
+                                    <p><b>To:</b> {item.dear}</p>
+                                    <p><b>Company:</b> {item.coverName}</p>
                                 </div>;
                             })}
-                            <div style={{ margin: '0 auto', width: '500px' }}>
+                            <div className="nav-wrapper" style={{ margin: '0 auto', width: '500px' }}>
                                 <ReactPaginate
                                     initialPage={page}
                                     onPageChange={(page) => setPage(page.selected)}

@@ -5,6 +5,7 @@ const Footer = lazy(() => import('./Footer'));
 const H2 = lazy(() => import('./H2'));
 const Header = lazy(() => import('./Header'));
 const TextInput = lazy(() => import('./TextInput'));
+const TextArea = lazy(() => import('./TextArea'));
 
 export {
     Button,
@@ -12,4 +13,5 @@ export {
     H2,
     Header,
     TextInput,
+    TextArea,
 };

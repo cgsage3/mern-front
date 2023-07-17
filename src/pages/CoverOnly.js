@@ -14,25 +14,6 @@ const CoverOnly = () => {
     const { data, isFetching } = useGetCoverQuery(coverId);
     console.log(data);
 
-
-    const [message, setMessage] = useState(null);
-
-    const handleClick = async () => {
-        try {
-          const response = await fetch(
-            `http://localhost:8080/api/v1/pdf/covers/${coverId}`,
-          );
-            setMessage(response.status);
-            console.log(response.status);
-        } catch (err) {
-            // catch any unexpected errors
-            setMessage(response.status);
-            console.log(err);
-        }
-    };
-
-    const pdfUrl = `http://localhost:8080/cover${coverId}.pdf`;
-    const pdfName = `${coverId}.pdf`;
     return (
         <>
                 <div id="pdf" className="pdf-cover">

@@ -19,9 +19,8 @@
 		"object-curly-spacing": "off",
 		"indent": "off",
 		"no-tabs": "off",
-		"no-unused-vars": "off",	
-		"max-len": "off",
-		"linebreak-style": "off",
+		"no-unused-vars": "off",
+		"max-len": "off"
 	},
 	"settings": {
 		"react": {

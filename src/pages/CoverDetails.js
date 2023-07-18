@@ -59,7 +59,7 @@ const CoverDetails = () => {
                   view Pdf
                 </button>
                 {messagePdf == 200 && <div><a href={pdfUrl} download={pdfName}>Download Cover Letter Pdf</a></div>}
-                {coverOnlyMode && <CoverOnly />}
+                <CoverOnly/>
             </Container>
         </ScrollView>
         <Footer />

@@ -2,6 +2,9 @@ import React from 'react';
 import { Header, Footer, H2 } from '../components';
 import styled from 'styled-components';
 import { Link, useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { AuthActions } from '../reducers/AuthReducer';
+import apiRequest, { showToast } from '../Utilities';
 import {
     useGetUserQuery,
 } from '../services/UserServices';
@@ -10,7 +13,24 @@ const UserDetails = () => {
     const { userId } = useParams();
 
     const { data, isFetching } = useGetUserQuery(userId);
+    const dispatch = useDispatch();
 
+    // const del = async () => {
+    //   try {
+    //     const l = `${process.env.REACT_APP_API_URL}/users/${userId}`;
+    //     console.log(l);
+    //     const result = await fetch(l, {
+    //      method: 'DELETE',
+    //     });
+    //     dispatch(AuthActions.logout());
+    //       // setMessagePdf(result.status);
+    //       console.log(result.status);
+    //   } catch (err) {
+    //         // catch any unexpected errors
+    //         // setMessage(response.status);
+    //         console.log(err);
+    //   }
+    // };
     return (
         <>
             <ScrollView>
@@ -18,6 +38,9 @@ const UserDetails = () => {
                 <Container>
                     <H2>User Details</H2>
                     <Link to="/users">Go Back</Link>
+                {/* <button className="click" onClick={del}>
+                  Delete User
+                </button>*/}
                     {isFetching ? <p>Loading...</p> :
                         <div>
                             <p><b>Name:</b> {data?.data?.name}</p>

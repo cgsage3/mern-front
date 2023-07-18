@@ -22,9 +22,9 @@ const Header = () => {
                         </Link>
                     </Logo>
                     <ul>
-                        <li>
+                        {/* <li>
                             <Link to="/users">Users</Link>
-                        </li>
+                        </li>*/}
                         {user === null && (
                             <>
                                 <li>

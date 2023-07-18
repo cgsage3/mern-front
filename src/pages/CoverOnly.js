@@ -17,6 +17,8 @@ const CoverOnly = () => {
     return (
         <>
                 <div id="pdf" className="pdf-cover">
+                                    {isFetching ? <p>Loading...</p> :
+                                    <>
                     <div className="page">
                         <div className="section row">
                             <h1 className="col"><span className="myname">Cesar Granda</span> </h1>
@@ -37,20 +39,20 @@ const CoverOnly = () => {
 
                             <div className="section-text col-right row cletter-wrapper">
                                 <div className="col">
-                                    {isFetching ? <p>Loading...</p> :
-                                    <>
+
                                     <h4>Dear {data?.data?.dear},</h4>
                                     <div id="cletter">
                                         {p(data?.data?.letter)}
                                     </div>
-                                    </>
-                                    }
+
                                     <p>Sincerely,</p>
                                     <h4>Cesar Granda</h4>
                                 </div>
                             </div>
                         </div>
                     </div>
+                                    </>
+                                    }
                 </div>
         </>
     );

@@ -75,6 +75,7 @@ const CoverDetails = () => {
                 <button className="click" onClick={downloadFile}>
                   view Pdf
                 </button>
+                {messagePdf == 404 && <div>No Pdf found</div>}
                 {messagePdf == 200 && <div><a href={pdfUrl} download={pdfName}>Download Cover Letter Pdf</a></div>}
                 <CoverOnly/>
                 {/* <button className="click" onClick={delFile}>

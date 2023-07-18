@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Header, Footer, H2 } from '../components';
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import {
     useGetCoversQuery,
 } from '../services/CoverServices';
@@ -28,6 +28,9 @@ const Covers = () => {
             <ScrollView>
                 <Header />
                 <Container className="cl-wrapper">
+                    <Link to="/insertCover">
+                        <BTN>Create a Cover Letter</BTN>
+                    </Link>
                     <H2>List of Cover Letters</H2>
                     {isFetching ? <div style={{ margin: '0 auto', width: '500px' }}><p>Loading...</p></div> :
                         <>
@@ -63,4 +66,18 @@ const ScrollView = styled.div`
 
 const Container = styled.div`
     padding-top: 50px;
+`;
+const BTN = styled.button`
+    padding: 15px 30px;
+    cursor: pointer;
+    font-size: 18px;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+    line-height: 28px;
+    text-align: center;
+    border-radius: 25px;
+    background-color: #4c84ff;
+    border: none;
+    display: block;
+    margin: 30px auto 16px;
 `;

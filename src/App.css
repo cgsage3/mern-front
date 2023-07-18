@@ -52,11 +52,11 @@ a:hover {
     padding: 0;
     background-color: #fff;
     font-size: 12px;
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: 'Source Sans 3', sans-serif;
     -webkit-font-smoothing: subpixel-antialiased;       
 }
 .pdf-cover * {
-    font-family: "Source Sans Pro", sans-serif;
+    font-family: "Source Sans 3", sans-serif;
 }
 .pdf-cover h1 { font-weight: 300;
      margin: 5px 0 0;
@@ -137,7 +137,7 @@ a:hover {
 .subsection { margin: 10px 0 5px }
 .desc { 
     font-size: 16px; 
-    font-family: 'Source Sans Pro', sans-serif; 
+    font-family: 'Source Sans 3', sans-serif; 
     color:#101010;
     text-align: justify;
 }
@@ -150,7 +150,7 @@ a:hover {
     letter-spacing:1px;
     font-size: 14px;
     line-height:28px;
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: 'Source Sans 3', sans-serif;
     text-transform:uppercase;
 }
 /*

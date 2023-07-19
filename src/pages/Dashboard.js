@@ -42,7 +42,6 @@ const ScrollView = styled.div`
 const Container = styled.div`
     text-align: center;
     padding-top: 50px;
-    width: 800px;
     margin: 0 auto;
 `;
 const CL = styled.button`

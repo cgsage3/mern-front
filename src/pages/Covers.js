@@ -32,15 +32,15 @@ const Covers = () => {
                         <BTN>Create a Cover Letter</BTN>
                     </Link>
                     <H2>List of Cover Letters</H2>
-                    {isFetching ? <div style={{ margin: '0 auto', width: '500px' }}><p>Loading...</p></div> :
+                    {isFetching ? <div style={{ margin: '0 auto' }}><p>Loading...</p></div> :
                         <>
                             {data?.data?.docs.map((item, index) => {
-                                return <div key={index} onClick={() => navigate(`/covers/${item.coverName}`)} style={{ padding: '10px', border: '2px solid gray', width: '500px', margin: '0 auto', marginBottom: '20px' }}>
+                                return <div key={index} onClick={() => navigate(`/covers/${item.coverName}`)} style={{ padding: '10px', border: '2px solid gray', margin: '0 auto', marginBottom: '20px' }}>
                                     <p><b>To:</b> {item.dear}</p>
                                     <p><b>Company:</b> {item.coverName}</p>
                                 </div>;
                             })}
-                            <div className="nav-wrapper" style={{ margin: '0 auto', width: '500px' }}>
+                            <div className="nav-wrapper" style={{ margin: '0 auto'}}>
                                 <ReactPaginate
                                     initialPage={page}
                                     onPageChange={(page) => setPage(page.selected)}

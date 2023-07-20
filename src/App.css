@@ -260,3 +260,7 @@ a:hover {
         width: 500px;
     }
 }
+
+.del {
+    background-color: red;
+}

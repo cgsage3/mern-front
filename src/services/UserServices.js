@@ -15,7 +15,7 @@ export const UserServices = api.injectEndpoints({
                 method: 'POST',
                 body,
             }),
-            invalidatesTags: [{ type: 'Users', id: 'LIST' }],
+            // invalidatesTags: [{ type: 'Users', id: 'LIST' }],
         }),
 
         getUser: build.query({
@@ -44,7 +44,7 @@ export const UserServices = api.injectEndpoints({
                     patchResult.undo();
                 }
             },
-            invalidatesTags: (result, error, { id }) => [{ type: 'Users', id }],
+            // invalidatesTags: (result, error, { id }) => [{ type: 'Users', id }],
         }),
 
         deleteUser: build.mutation({

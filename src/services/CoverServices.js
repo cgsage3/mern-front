@@ -17,14 +17,14 @@ export const CoverServices = api.injectEndpoints({
             providesTags: (result, error, id) => [{ type: 'Covers', id }],
         }),
 
-        addCover: build.mutation({
-            query: (body) => ({
-                url: `covers`,
-                method: 'POST',
-                body,
-            }),
-            invalidatesTags: [{ type: 'Covers', id: 'LIST' }],
-        }),
+        // addCover: build.mutation({
+        //     query: (body) => ({
+        //         url: `covers`,
+        //         method: 'POST',
+        //         body,
+        //     }),
+        //     invalidatesTags: [{ type: 'Covers', id: 'LIST' }],
+        // }),
     }),
 
 });

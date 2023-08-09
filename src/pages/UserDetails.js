@@ -14,7 +14,8 @@ const UserDetails = () => {
 
     const { data, isFetching } = useGetUserQuery(userId);
     const dispatch = useDispatch();
-
+    // const cData= data?.data?.coversPublished;
+console.log(data);
     // const del = async () => {
     //   try {
     //     const l = `${process.env.REACT_APP_API_URL}/users/${userId}`;
@@ -45,6 +46,7 @@ const UserDetails = () => {
                         <div>
                             <p><b>Name:</b> {data?.data?.name}</p>
                             <p><b>Email:</b> {data?.data?.email}</p>
+
                         </div>
                     }
                 </Container>

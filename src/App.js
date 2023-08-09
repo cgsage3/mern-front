@@ -21,6 +21,7 @@ const Dashboard = lazy(() => import('./pages/Dashboard'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 const Users = lazy(() => import('./pages/Users'));
 const Covers = lazy(() => import('./pages/Covers'));
+const Publisher= lazy(() => import('./pages/Publisher'));
 const UserDetails = lazy(() => import('./pages/UserDetails'));
 const CoverDetails = lazy(() => import('./pages/CoverDetails'));
 const CoverOnly = lazy(() => import('./pages/CoverOnly'));
@@ -91,6 +92,16 @@ const AppRoutes = () => {
                         </PrivateRoute>
                     }
                 />
+                <Route
+                    exact={true}
+                    path="/publisher"
+                    element={
+                        <PrivateRoute>
+                            <Publisher />
+                        </PrivateRoute>
+                    }
+                />
+
                 <Route
                     exact={true}
                     path="/covers"

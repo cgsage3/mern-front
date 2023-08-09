@@ -1,26 +1,33 @@
 import React, { useEffect, useState } from 'react';
 import { Header, Footer, H2 } from '../components';
 import styled from 'styled-components';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, useParams } from 'react-router-dom';
 import {
-    useGetCoversQuery,
-} from '../services/CoverServices';
+    useGetPublisherQuery,
+    useGetPublishersQuery,
+} from '../services/publishedServices';
 import { api } from '../services/api';
 import ReactPaginate from 'react-paginate';
+import { useSelector } from 'react-redux';
 
-const Covers = () => {
+
+const Publisher = () => {
     const [page, setPage] = useState(0);
     const navigate = useNavigate();
+    const user = useSelector((state) => state.auth.user);
 
-    const { data, isFetching } = useGetCoversQuery(page + 1);
+    // const { userId } = useParams();
+    // const { data, isFetching } = useGetPublisherQuery(user._id);
+    const { data, isFetching } = useGetPublishersQuery({id: user._id, page: page + 1});
+
     // console.log('data', page);
     console.log(data);
-    // const getCovers = () => {
-    // 	dispatch(api.endpoints.getCovers.initiate());
+    // const getPublisher = () => {
+    // 	dispatch(api.endpoints.getPublisher.initiate());
     // };
 
     // useEffect(() => {
-    // 	getCovers();
+    // 	getPublisher();
     // }, []);
 
     return (
@@ -34,7 +41,7 @@ const Covers = () => {
                     <H2>List of Cover Letters</H2>
                     {isFetching ? <div style={{ margin: '0 auto' }}><p>Loading...</p></div> :
                         <>
-                            {data?.data?.docs.map((item, index) => {
+                            {data?.data?.coversPublished.map((item, index) => {
                                 return <div key={index} onClick={() => navigate(`/covers/${item._id}`)} style={{ padding: '10px', border: '2px solid gray', margin: '0 auto', marginBottom: '20px' }}>
                                     <p><b>Company:</b> {item.coverName}</p>
                                     <p><b>To:</b> {item.dear}</p>
@@ -45,7 +52,7 @@ const Covers = () => {
                                     initialPage={page}
                                     onPageChange={(page) => setPage(page.selected)}
                                     pageRangeDisplayed={5}
-                                    pageCount={data?.data?.totalPages}
+                                    pageCount={2}
                                     activeClassName="active"
                                 />
                             </div>
@@ -58,7 +65,7 @@ const Covers = () => {
     );
 };
 
-export default Covers;
+export default Publisher;
 
 const ScrollView = styled.div`
     min-height: calc(100vh - 80px);

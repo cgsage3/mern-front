@@ -22,9 +22,9 @@ const Header = () => {
                         </Link>
                     </Logo>
                     <ul>
-                        {/* <li>
+                        <li>
                             <Link to="/users">Users</Link>
-                        </li>*/}
+                        </li>
                         {user === null && (
                             <>
                                 <li>
@@ -38,7 +38,7 @@ const Header = () => {
                         {user !== null && (
                             <>
                                 <li>
-                                    <Link to="/covers">Cover Letters</Link>
+                                    <Link to="/publisher">Cover Letters</Link>
                                 </li>
                                 <li>
                                     <a

@@ -1,24 +1,36 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Header, Footer, TextInput, TextArea, H2, Button } from '../components';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import apiRequest, { showToast } from '../Utilities';
 import { AuthActions } from '../reducers/AuthReducer';
 import { useForm, Controller } from 'react-hook-form';
 
 const InsertCover = () => {
+    const user = useSelector((state) => state.auth.user);
+
     const {
         handleSubmit,
         control,
-        formState: { isSubmitting, errors },
-    } = useForm({ mode: 'onChange' });
+        register,
+        setValue,
+        formState: { isSubmitSuccessful, errors },
+    } = useForm({
+    defaultValues: {
+      user: user._id,
+    },
+    mode: 'onSubmit',
+    });
 
     const dispatch = useDispatch();
+    const [uInfo, setUInfo] = useState(null);
 
+    console.log(user._id);
     const addCover = async (payload) => {
         try {
-            const response = await apiRequest.post(`addCover`, payload);
+            // user._id.push(payload);
+            const response = await apiRequest.post(`covers`, payload);
             dispatch(AuthActions.setAuth(response.data.data));
         } catch (error) {
             showToast(error?.response?.data?.message, 'error');
@@ -65,6 +77,21 @@ const InsertCover = () => {
                                 />
                             )}
                         />
+
+                        <Controller
+                            name="user"
+                            control={control}
+                            render={(field) => (
+                                <TextInput
+                                    {...field}
+                                    label="id:"
+                                    type="text"
+                                    errors={errors}
+                                />
+                            )}
+                        />
+
+
                         <Controller
                             name="letter"
                             control={control}
@@ -82,9 +109,10 @@ const InsertCover = () => {
                         <Button
                             className="btn btn-secondary"
                             type="submit"
-                            disabled={isSubmitting}
+                            disabled={isSubmitSuccessful}
                         >
-                            {isSubmitting ? 'Submitting...' : 'Add Cover Letter'}
+
+                            {isSubmitSuccessful ? 'Submitted' : 'Add Cover Letter'}
                         </Button>
 
                     </form>

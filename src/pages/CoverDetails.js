@@ -19,7 +19,7 @@ const CoverDetails = () => {
 
     const { data, isFetching } = useGetCoverQuery(coverId);
     const coverIndex = data?.data?._id;
-    console.log(coverIndex);
+    console.log(data);
 
     const [messageG, setMessageG] = useState(null);
     const [messagePdf, setMessagePdf] = useState(null);
@@ -45,6 +45,7 @@ const CoverDetails = () => {
     };
 
     const pdfUrl = `https://cover-letter-mern-back.onrender.com/uploads/cover${coverId}.pdf`;
+    // const pdfUrl = `http://localhost:8080/uploads/cover${coverId}.pdf`;
     const pdfName = `${coverId}.pdf`;
 
     // const bioMDB = async () => {
@@ -59,7 +60,7 @@ const CoverDetails = () => {
       console.log(result.status);
     };
 
-    const l = `${process.env.REACT_APP_API_URL}/del/covers/${coverIndex}`;
+    const l = `${process.env.REACT_APP_API_URL}/covers/${coverId}`;
     const delFile = async () => {
         try {
             const fetchResult = await fetch(l, {

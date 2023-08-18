@@ -16,12 +16,13 @@ import Loading from 'pages/Loading';
 
 const Login = lazy(() => import('./pages/Login'));
 const Signup = lazy(() => import('./pages/Signup'));
-const InsertCover = lazy(() => import('./pages/InsertCover'));
 const Dashboard = lazy(() => import('./pages/Dashboard'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 const Users = lazy(() => import('./pages/Users'));
-const Covers = lazy(() => import('./pages/Covers'));
 const Publisher= lazy(() => import('./pages/Publisher'));
+const InsertCover = lazy(() => import('./pages/InsertCover'));
+const EditCover = lazy(() => import('./pages/editCover'));
+const Covers = lazy(() => import('./pages/Covers'));
 const UserDetails = lazy(() => import('./pages/UserDetails'));
 const CoverDetails = lazy(() => import('./pages/CoverDetails'));
 const CoverOnly = lazy(() => import('./pages/CoverOnly'));
@@ -127,6 +128,17 @@ const AppRoutes = () => {
                         </PrivateRoute>
                     }
                 />
+                <Route
+                    exact={true}
+                    path="/covers/edit/:coverId"
+                    element={
+                        <PrivateRoute>
+                            <EditCover />
+                        </PrivateRoute>
+                    }
+                />
+
+
                 <Route
                     exact={true}
                     path="/users/:userId"

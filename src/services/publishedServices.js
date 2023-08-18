@@ -7,28 +7,27 @@ export const PublishedService = api.injectEndpoints({
         getPublishers: build.query({
             query: (args) => {
                 // Destructuring Object
-                const { id, page } = args;
+                const { id, page, limit } = args;
                 return {
                     // Returns url with multiple args
-                    url: `some/${id}?page=${page}`,
+                    url: `publish/${id}?page=${page}&limit=${limit}`,
                 };
             },
-            // query: (id, page) => `some/${id}?page=${page}`,
+            // query: (id, page) => `publish/${id}?page=${page}`,
             providesTags: (result) => result?.data?.coversPublished ? result.data?.coversPublished.map(({ _id }) => ({ type: 'userCovers', _id })) : [],
         }),
 
-        getPublisher: build.query({
+        getPublisherAll: build.query({
             query: (id) => ({
-                url: `some/${id}`,
+                url: `publishAll/${id}`,
                 method: 'GET',
             }),
-            providesTags: (result, error, id) => [{ type: 'userCovers', id }],
         }),
     }),
 
 });
 
 export const {
-    useGetPublisherQuery,
+    useGetPublisherAllQuery,
     useGetPublishersQuery,
 } = PublishedService;

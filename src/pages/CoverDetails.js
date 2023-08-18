@@ -44,8 +44,8 @@ const CoverDetails = () => {
         }
     };
 
-    // const pdfUrl = `https://cover-letter-mern-back.onrender.com/uploads/cover${coverId}.pdf`;
-    const pdfUrl = `http://localhost:8080/uploads/cover${coverId}.pdf`;
+    const pdfUrl = `https://cover-letter-mern-back.onrender.com/uploads/cover${coverId}.pdf`;
+    // const pdfUrl = `http://localhost:8080/uploads/cover${coverId}.pdf`;
     const pdfName = `${coverId}.pdf`;
 
     // const bioMDB = async () => {

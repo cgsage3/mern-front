@@ -19,6 +19,7 @@ const CoverDetails = () => {
 
     const { data, isFetching } = useGetCoverQuery(coverId);
     const coverIndex = data?.data?._id;
+    const cName = data?.data?.coverName;
     console.log(data);
 
     const [messageG, setMessageG] = useState(null);
@@ -36,7 +37,7 @@ const CoverDetails = () => {
           );
           const result = await fetch(url, { method: 'HEAD' });
             setMessageG(response.status);
-            console.log(response.status);
+            console.log(response);
         } catch (err) {
             // catch any unexpected errors
             setMessage(response.status);
@@ -94,11 +95,16 @@ const CoverDetails = () => {
         <ScrollView>
             <Header />
             <Container>
-
+                <button className="click">
+                    <Link to={`/edit-cover/${coverId}`}>
+                        Edit Cover Letter
+                    </Link>
+                </button>
                 <button className="click" onClick={handleClick}>Generate Pdf</button>
                 <button className="click" onClick={downloadFile}>
                   view Pdf
                 </button>
+                    <H2>{cName}</H2>
                 {messagePdf == 404 && <div>No Pdf found</div>}
                 {messagePdf == 200 && <div><a href={pdfUrl} download={pdfName}>Download Cover Letter Pdf</a></div>}
                 <CoverOnly/>

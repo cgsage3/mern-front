@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { Header, Footer, TextInput, TextArea, H2, Button } from '../components';
 import styled from 'styled-components';
 import { Link, useParams } from 'react-router-dom';
@@ -10,6 +10,25 @@ import { useForm, Controller } from 'react-hook-form';
 const EditCover = () => {
     const { coverId } = useParams();
     const user = useSelector((state) => state.auth.user);
+    const [totalP, setTotalP] = useState([]);
+    useEffect(()=> {
+      totalMDB();
+    }, []);
+    const totalMDB = async () => {
+        fetch(`${process.env.REACT_APP_API_URL}/covers/` + coverId)
+        .then((response) => {
+            return response.json(); // << This is the problem
+        })
+        .then((responseData) => { // responseData = undefined
+            setTotalP(responseData.data);
+            // setbio(responseData.json());
+            return responseData;
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
+    };
+
     const {
         handleSubmit,
         control,
@@ -17,10 +36,11 @@ const EditCover = () => {
         setValue,
         formState: { isSubmitSuccessful, errors },
     } = useForm({
-    defaultValues: {
-      user: user._id,
-    },
-    mode: 'onSubmit',
+        values: totalP,
+        resetOptions: {
+          keepDirtyValues: true, // keep dirty fields unchanged, but update defaultValues
+        },
+        mode: 'onSubmit',
     });
 
     // const dispatch = useDispatch();
@@ -34,6 +54,7 @@ const EditCover = () => {
         }
     };
 
+    console.log(totalP);
     return (
         <>
             <ScrollView>
@@ -47,9 +68,8 @@ const EditCover = () => {
                             render={(field) => (
                                 <TextInput
                                     {...field}
-                                    label="Company Name"
+                                    label="Company Name:"
                                     type="text"
-                                    placeholder="Enter Company Name"
                                     errors={errors}
                                 />
                             )}
@@ -62,7 +82,6 @@ const EditCover = () => {
                                     {...field}
                                     label="Dear:"
                                     type="text"
-                                    placeholder="Hiring Manager"
                                     errors={errors}
                                 />
                             )}
@@ -85,9 +104,8 @@ const EditCover = () => {
                             render={(field) => (
                                 <TextArea
                                     {...field}
-                                    label="Letter"
+                                    label="Letter:"
                                     type="text"
-                                    placeholder="Enter Your Letter"
                                     errors={errors}
                                 />
                             )}

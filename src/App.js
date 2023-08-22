@@ -130,7 +130,7 @@ const AppRoutes = () => {
                 />
                 <Route
                     exact={true}
-                    path="/covers/edit/:coverId"
+                    path="/edit-cover/:coverId"
                     element={
                         <PrivateRoute>
                             <EditCover />

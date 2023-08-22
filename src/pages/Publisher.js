@@ -28,17 +28,17 @@ const Publisher = () => {
 
     const totalMDB = async () => {
         fetch(`${process.env.REACT_APP_API_URL}/publishAll/` + user._id)
-    .then((response) => {
-        return response.json(); // << This is the problem
-    })
-    .then((responseData) => { // responseData = undefined
-        setTotalP(responseData.data.coversPublishedAll);
-        // setbio(responseData.json());
-        return responseData;
-    })
-  .catch(function(err) {
-      console.log(err);
-  });
+        .then((response) => {
+            return response.json(); // << This is the problem
+        })
+        .then((responseData) => { // responseData = undefined
+            setTotalP(responseData.data.coversPublishedAll);
+            // setbio(responseData.json());
+            return responseData;
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
     };
 
     // const getPublisher = () => {

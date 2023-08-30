@@ -21,7 +21,6 @@ const EditCover = () => {
         })
         .then((responseData) => { // responseData = undefined
             setTotalP(responseData.data);
-            // setbio(responseData.json());
             return responseData;
         })
         .catch(function(err) {
@@ -54,15 +53,21 @@ const EditCover = () => {
         }
     };
 
-    console.log(totalP);
+    console.log(totalP.user);
+    console.log(user._id);
     return (
         <>
             <ScrollView>
                 <Header />
                 <Container>
+
+                    {
+                        totalP.user === user._id ?
+                        <>
                     <H2>Update Cover Letter</H2>
                     <form onSubmit={handleSubmit((values) => edit(values))}>
                         <Controller
+                            defaultValue = {''}
                             name="coverName"
                             control={control}
                             render={(field) => (
@@ -75,6 +80,7 @@ const EditCover = () => {
                             )}
                         />
                         <Controller
+                            defaultValue = {''}
                             name="dear"
                             control={control}
                             render={(field) => (
@@ -87,18 +93,19 @@ const EditCover = () => {
                             )}
                         />
                         <Controller
+                            defaultValue = {''}
                             name="user"
                             control={control}
                             render={(field) => (
                                 <TextInput
                                     {...field}
-                                    label="id:"
-                                    type="text"
+                                    type="hidden"
                                     errors={errors}
                                 />
                             )}
                         />
                         <Controller
+                            defaultValue = {''}
                             name="letter"
                             control={control}
                             render={(field) => (
@@ -120,6 +127,9 @@ const EditCover = () => {
                         </Button>
 
                     </form>
+                    </>:
+                    <h1>Not the owner of this cover letter</h1>
+                    }
                 </Container>
             </ScrollView>
             <Footer />

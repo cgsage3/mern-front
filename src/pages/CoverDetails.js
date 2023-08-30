@@ -22,49 +22,47 @@ const CoverDetails = () => {
     const cName = data?.data?.coverName;
     console.log(data);
 
-    const [messageG, setMessageG] = useState(null);
-    const [messagePdf, setMessagePdf] = useState(null);
+    const [messagePdf, setMessagePdf] = useState('not clicked');
     const [messageDel, setMessageDel] = useState(null);
-    // const [bio, setbio] = useState([]);
-    // useEffect(()=> {
-    //   bioMDB();
-    // }, []);
+    const [spinner, setSpinner] = useState('hidden');
+    // const pdfUrl = `https://cover-letter-mern-back.onrender.com/uploads/cover${coverId}.pdf`;
+    const pdfUrl = `${process.env.REACT_APP_BACK_URL}/uploads/cover-${coverId}.pdf`;
+    const pdfName = `${coverId}.pdf`;
 
     const handleClick = async () => {
         try {
-          const response = await fetch(
-            `${process.env.REACT_APP_API_URL}/pdf/covers/${coverId}`,
-          );
-          const result = await fetch(url, { method: 'HEAD' });
-            setMessageG(response.status);
-            console.log(response);
+          const ping = await fetch(pdfUrl, { method: 'HEAD' });
+          console.log(ping);
+          if (ping.status == 404) {
+            setMessagePdf('not-found');
+          }
+          if (ping.status == 200) {
+            setMessagePdf('found');
+          }
         } catch (err) {
             // catch any unexpected errors
-            setMessage(response.status);
+            console.log(err);
+        }
+    };
+    const generate = async () => {
+        setSpinner('clicked');
+        try {
+            const response = await fetch(
+                `${process.env.REACT_APP_API_URL}/pdf/covers/${coverId}`,
+                setSpinner('finished'),
+            );
+            const r = await response.json();
+            console.log('r rep', r);
+        } catch (err) {
+            // catch any unexpected errors
             console.log(err);
         }
     };
 
-    const pdfUrl = `https://cover-letter-mern-back.onrender.com/uploads/cover${coverId}.pdf`;
-    // const pdfUrl = `http://localhost:8080/uploads/cover${coverId}.pdf`;
-    const pdfName = `${coverId}.pdf`;
-
-    // const bioMDB = async () => {
-    //     const response = await fetch(pdfUrl, { method: 'HEAD' });
-
-    //     setbio(await response.json());
-    // };
-
-    const downloadFile = async () => {
-      const result = await fetch(pdfUrl, { method: 'HEAD' });
-      setMessagePdf(result.status);
-      console.log(result.status);
-    };
-
-    const l = `${process.env.REACT_APP_API_URL}/covers/${coverId}`;
+    const delUrl = `${process.env.REACT_APP_API_URL}/covers/${coverId}`;
     const delFile = async () => {
         try {
-            const fetchResult = await fetch(l, {
+            const fetchResult = await fetch(delUrl, {
              method: 'DELETE',
             });
             const result = await fetchResult.json();
@@ -100,13 +98,26 @@ const CoverDetails = () => {
                         Edit Cover Letter
                     </Link>
                 </button>
-                <button className="click" onClick={handleClick}>Generate Pdf</button>
-                <button className="click" onClick={downloadFile}>
-                  view Pdf
-                </button>
+                <button className="click" onClick={handleClick}>View Pdf</button>
+                    <div>
+                        {messagePdf=='not-found' &&
+                        <>
+                            <p>no PDF found. Click button to generate pdf:</p>
+                            <button className="click" onClick={generate}>Generate Pdf</button>
+                            {spinner && (
+                            <p>{spinner}</p>
+                            )}
+                        </>
+                        }
+                        {messagePdf=='found' &&
+                        <>
+                        <a href={pdfUrl} download={pdfName}>Download Cover Letter Pdf</a>
+
+                        </>
+                        }
+                    </div>
                     <H2>{cName}</H2>
-                {messagePdf == 404 && <div>No Pdf found</div>}
-                {messagePdf == 200 && <div><a href={pdfUrl} download={pdfName}>Download Cover Letter Pdf</a></div>}
+
                 <CoverOnly/>
                 <button className="click del" onClick={delFile}>
                   Delete Cover Letter

@@ -14,14 +14,16 @@ const Covers = () => {
 
     const { data, isFetching } = useGetCoversQuery(page + 1);
     // console.log('data', page);
-    console.log(data);
-    // const getCovers = () => {
-    // 	dispatch(api.endpoints.getCovers.initiate());
-    // };
+    const coverList = data?.data?.docs;
+    console.log(coverList);
 
-    // useEffect(() => {
-    // 	getCovers();
-    // }, []);
+    const [searchTerm, setSearchTerm] = useState('');
+    const results = coverList?.filter((cover) =>
+        cover.coverName.toLowerCase().includes(searchTerm),
+    );
+    const handleChange = (e) => {
+        setSearchTerm(e.target.value);
+    };
 
     return (
         <>
@@ -32,9 +34,16 @@ const Covers = () => {
                         <BTN>Create a Cover Letter</BTN>
                     </Link>
                     <H2>List of Cover Letters</H2>
-                    {isFetching ? <div style={{ margin: '0 auto' }}><p>Loading...</p></div> :
+                    <input
+                        type="search"
+                        placeholder="Search"
+                        value={searchTerm}
+                        onChange={handleChange}
+                    />
+                    {
                         <>
-                            {data?.data?.docs.map((item, index) => {
+
+                            {results?.map((item, index) => {
                                 return <div key={index} onClick={() => navigate(`/covers/${item._id}`)} style={{ padding: '10px', border: '2px solid gray', margin: '0 auto', marginBottom: '20px' }}>
                                     <p><b>Company:</b> {item.coverName}</p>
                                     <p><b>To:</b> {item.dear}</p>

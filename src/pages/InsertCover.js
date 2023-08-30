@@ -84,8 +84,7 @@ const InsertCover = () => {
                             render={(field) => (
                                 <TextInput
                                     {...field}
-                                    label="id:"
-                                    type="text"
+                                    type="hidden"
                                     errors={errors}
                                 />
                             )}

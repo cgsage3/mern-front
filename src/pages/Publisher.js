@@ -13,14 +13,14 @@ import { useSelector } from 'react-redux';
 
 const Publisher = () => {
     const [page, setPage] = useState(0);
-    const [limit, setLimit] = useState(10);// used to set number of documents per page
+    const [limit, setLimit] = useState(5);// used to set number of documents per page
     const navigate = useNavigate();
     const user = useSelector((state) => state.auth.user);
 
     // const { userId } = useParams();
     // const dataAll = useGetPublisherAllQuery(user._id);
     const { data, isFetching } = useGetPublishersQuery({id: user._id, page: page + 1, limit: limit});
-
+    const coversAll= data?.data?.coversPublished;
     const [totalP, setTotalP] = useState([]);
     useEffect(()=> {
       totalMDB();
@@ -41,14 +41,15 @@ const Publisher = () => {
         });
     };
 
-    // const getPublisher = () => {
-    // 	dispatch(api.endpoints.getPublisher.initiate());
-    // };
-
-    // useEffect(() => {
-    // 	getPublisher();
-    // }, []);
-console.log(Math.ceil(totalP/limit));
+    const [searchTerm, setSearchTerm] = useState('');
+    const results = coversAll?.filter((cover) =>
+        cover.coverName.toLowerCase().includes(searchTerm),
+    );
+    const handleChange = (e) => {
+        setSearchTerm(e.target.value);
+    };
+    console.log(searchTerm);
+// console.log(Math.ceil(totalP/limit));
     return (
         <>
             <ScrollView>
@@ -58,11 +59,16 @@ console.log(Math.ceil(totalP/limit));
                         <BTN>Create a Cover Letter</BTN>
                     </Link>
                     <H2>List of Cover Letters</H2>
-
+                    <input
+                        type="search"
+                        placeholder="Search"
+                        value={searchTerm}
+                        onChange={handleChange}
+                    />
                     {isFetching ? <div style={{ margin: '0 auto' }}><p>Loading...</p></div> :
                         <>
 
-                            {data?.data?.coversPublished.map((item, index) => {
+                            {results.map((item, index) => {
                                 return <div key={index} onClick={() => navigate(`/covers/${item._id}`)} style={{ padding: '10px', border: '2px solid gray', margin: '0 auto', marginBottom: '20px' }}>
                                     <p><b>Company:</b> {item.coverName}</p>
                                     <p><b>To:</b> {item.dear}</p>

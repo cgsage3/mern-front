@@ -21,6 +21,7 @@ const NotFound = lazy(() => import('./pages/NotFound'));
 const Users = lazy(() => import('./pages/Users'));
 const Publisher= lazy(() => import('./pages/Publisher'));
 const InsertCover = lazy(() => import('./pages/InsertCover'));
+const InsertResume = lazy(() => import('./pages/InsertResume'));
 const EditCover = lazy(() => import('./pages/editCover'));
 const Covers = lazy(() => import('./pages/Covers'));
 const UserDetails = lazy(() => import('./pages/UserDetails'));
@@ -90,6 +91,15 @@ const AppRoutes = () => {
                     element={
                         <PrivateRoute>
                             <InsertCover />
+                        </PrivateRoute>
+                    }
+                />
+                <Route
+                    exact={true}
+                    path="/insert-resume"
+                    element={
+                        <PrivateRoute>
+                            <InsertResume />
                         </PrivateRoute>
                     }
                 />

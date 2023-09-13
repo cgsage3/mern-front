@@ -5,23 +5,30 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import apiRequest, { showToast } from '../Utilities';
 import { AuthActions } from '../reducers/AuthReducer';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm, Controller, useFieldArray } from 'react-hook-form';
 
-const InsertCover = () => {
+const InsertResume = () => {
     const user = useSelector((state) => state.auth.user);
 
     const {
         handleSubmit,
         control,
         register,
+        reset,
+        trigger,
+        setError,
         setValue,
         formState: { isSubmitSuccessful, errors },
     } = useForm({
-    defaultValues: {
-      user: user._id,
-    },
-    mode: 'onSubmit',
+        defaultValues: {
+          user: user._id,
+        },
+        mode: 'onSubmit',
     });
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: 'details',
+  });
 
     const dispatch = useDispatch();
     const [uInfo, setUInfo] = useState(null);
@@ -30,7 +37,7 @@ const InsertCover = () => {
     const addCover = async (payload) => {
         try {
             // user._id.push(payload);
-            const response = await apiRequest.post(`covers`, payload);
+            const response = await apiRequest.post(`add-experience`, payload);
             dispatch(AuthActions.setAuth(response.data.data));
         } catch (error) {
             showToast(error?.response?.data?.message, 'error');
@@ -42,38 +49,31 @@ const InsertCover = () => {
             <ScrollView>
                 <Header />
                 <Container>
-                    <H2>Add Cover Letter</H2>
+                    <H2>Add Resume Version</H2>
                     <form onSubmit={handleSubmit((values) => addCover(values))}>
                         <Controller
-                            name="coverName"
+                            name="year"
                             control={control}
                             render={(field) => (
                                 <TextInput
                                     {...field}
-                                    label="Company Name"
+                                    label="Year:"
                                     type="text"
-                                    placeholder="Enter Company Name"
+                                    placeholder="Enter years"
                                     errors={errors}
                                     value={ field.value || '' }
                                 />
                             )}
-                            rules={{
-                                required: 'Company Name is required.',
-                                maxLength: {
-                                    value: 100,
-                                    message: 'This input exceed maxLength.',
-                                },
-                            }}
                         />
                         <Controller
-                            name="dear"
+                            name="position"
                             control={control}
                             render={(field) => (
                                 <TextInput
                                     {...field}
-                                    label="Dear:"
+                                    label="Position:"
                                     type="text"
-                                    placeholder="Hiring Manager"
+                                    placeholder=""
                                     errors={errors}
                                     value={ field.value || '' }
                                 />
@@ -95,20 +95,45 @@ const InsertCover = () => {
 
 
                         <Controller
-                            name="letter"
+                            name="companyName"
                             control={control}
                             render={(field) => (
-                                <TextArea
+                                <TextInput
                                     {...field}
-                                    label="Letter"
+                                    label="Company Name:"
                                     type="text"
-                                    placeholder="Enter Your Letter"
+                                    placeholder=""
                                     errors={errors}
                                     value={ field.value || '' }
                                 />
                             )}
-                            rules={{ required: 'Letter is required.' }}
                         />
+
+<ul>
+        {fields.map((item, index) => (
+          <li key={item.id}>
+            <Controller
+              name={`details.${index}`}
+              control={control}
+              render={( field ) => (
+                <TextInput
+                    {...field}
+                    label="something"
+                    placeholder=""
+                />
+              )}
+            />
+            <button type="button" onClick={() => remove(index)}>Delete</button>
+          </li>
+        ))}
+      </ul>
+      <button
+        type="button"
+        onClick={() => append()}
+      >
+        append
+      </button>
+
                         <Button
                             className="btn btn-secondary"
                             type="submit"
@@ -126,7 +151,7 @@ const InsertCover = () => {
     );
 };
 
-export default InsertCover;
+export default InsertResume;
 
 const ScrollView = styled.div`
     min-height: calc(100vh - 80px);

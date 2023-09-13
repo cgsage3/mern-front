@@ -26,6 +26,10 @@ const Dashboard = () => {
                         <BTN>Create a Cover Letter</BTN>
                     </Link>
 
+                    <Link to="/insert-resume">
+                        <BTN>Create a Resume</BTN>
+                    </Link>
+
                 </Container>
             </ScrollView>
             <Footer />

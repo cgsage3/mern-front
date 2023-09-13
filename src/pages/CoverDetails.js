@@ -28,7 +28,7 @@ const CoverDetails = () => {
     // const pdfUrl = `https://cover-letter-mern-back.onrender.com/uploads/cover${coverId}.pdf`;
     const pdfUrl = `${process.env.REACT_APP_BACK_URL}/uploads/cover-${coverId}.pdf`;
     const pdfName = `${coverId}.pdf`;
-
+console.log(pdfUrl);
     const handleClick = async () => {
         try {
           const ping = await fetch(pdfUrl, { method: 'HEAD' });

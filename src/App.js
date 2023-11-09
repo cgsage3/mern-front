@@ -10,27 +10,27 @@ import {
     Route,
     Navigate,
 } from 'react-router-dom';
-import { history } from './Utilities';
-import { store, persistor } from './Store';
-import Loading from 'pages/Loading';
+import { history } from './utils/Utilities';
+import { store, persistor } from './store/Store';
+import Loading from './components/Loading';
 
-const Login = lazy(() => import('./pages/Login'));
-const Signup = lazy(() => import('./pages/Signup'));
-const Dashboard = lazy(() => import('./pages/Dashboard'));
-const NotFound = lazy(() => import('./pages/NotFound'));
-const Users = lazy(() => import('./pages/Users'));
-const Publisher= lazy(() => import('./pages/Publisher'));
-const InsertCover = lazy(() => import('./pages/InsertCover'));
-const InsertResume = lazy(() => import('./pages/InsertResume'));
-const EditCover = lazy(() => import('./pages/editCover'));
-const Covers = lazy(() => import('./pages/Covers'));
-const UserDetails = lazy(() => import('./pages/UserDetails'));
-const CoverDetails = lazy(() => import('./pages/CoverDetails'));
-const CoverOnly = lazy(() => import('./pages/CoverOnly'));
+const Login = lazy(() => import('./routes/login/Login'));
+const Signup = lazy(() => import('./routes/signup/Signup'));
+const Dashboard = lazy(() => import('./routes/dashboard/Dashboard'));
+const NotFound = lazy(() => import('./components/NotFound'));
+const InsertResume = lazy(() => import('./routes/resumes/InsertResume'));
+const Publisher= lazy(() => import('./routes/covers/Publisher'));
+const InsertCover = lazy(() => import('./routes/covers/InsertCover'));
+const EditCover = lazy(() => import('./routes/covers/editCover'));
+const Covers = lazy(() => import('./routes/covers/Covers'));
+const Users = lazy(() => import('./routes/users/Users'));
+const UserDetails = lazy(() => import('./routes/users/UserDetails'));
+const CoverDetails = lazy(() => import('./routes/covers/CoverDetails'));
+const CoverOnly = lazy(() => import('./routes/covers/CoverOnly'));
 
 const onRender = (id, phase, actualDuration, baseDuration, startTime, commitTime) => {
     // Aggregate or log render timings...
-    console.log({ id, phase, actualDuration, baseDuration, startTime, commitTime });
+    // console.log({ id, phase, actualDuration, baseDuration, startTime, commitTime });
 };
 
 const AuthRoute = ({ children }) => {

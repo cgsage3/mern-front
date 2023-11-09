@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { AuthActions } from '../reducers/AuthReducer';
+import { AuthActions } from '../store/auth/AuthReducer';
 
 const Header = () => {
     const dispatch = useDispatch();

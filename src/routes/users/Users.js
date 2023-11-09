@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Header, Footer, H2 } from '../components';
+import { Header, Footer, H2 } from '../../components';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import {
     useGetUsersQuery,
-} from '../services/UserServices';
-import { api } from '../services/api';
+} from '../../store/user/UserServices';
+// import { api } from '../../store/api/api';
 import ReactPaginate from 'react-paginate';
 
 const Users = () => {
@@ -13,7 +13,7 @@ const Users = () => {
     const navigate = useNavigate();
 
     const { data, isFetching } = useGetUsersQuery(page + 1);
-    console.log('data', page);
+    // console.log('data', page);
     // const getUsers = () => {
     // 	dispatch(api.endpoints.getUsers.initiate());
     // };

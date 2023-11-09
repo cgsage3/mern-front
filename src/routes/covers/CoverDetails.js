@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Header, Footer, H2 } from '../components';
+import { Header, Footer, H2 } from '../../components';
 import styled from 'styled-components';
 import { Link, useParams } from 'react-router-dom';
 import {
     useGetCoverQuery,
-} from '../services/CoverServices';
+} from '../../store/covers/CoverServices';
 import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
 import CoverOnly from './CoverOnly';
 

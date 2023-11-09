@@ -1,24 +1,36 @@
-import React from 'react';
-import { Header, Footer, TextInput, H2, Button } from '../components';
+import React, {useState} from 'react';
+import { Header, Footer, TextInput, TextArea, H2, Button } from '../../components';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import apiRequest, { showToast } from '../Utilities';
-import { AuthActions } from '../reducers/AuthReducer';
+import { useDispatch, useSelector } from 'react-redux';
+import apiRequest, { showToast } from '../../utils/Utilities';
+import { AuthActions } from '../../store/auth/AuthReducer';
 import { useForm, Controller } from 'react-hook-form';
 
-const Signup = () => {
+const InsertCover = () => {
+    const user = useSelector((state) => state.auth.user);
+
     const {
         handleSubmit,
         control,
-        formState: { isSubmitting, errors },
-    } = useForm({ mode: 'onChange' });
+        register,
+        setValue,
+        formState: { isSubmitSuccessful, errors },
+    } = useForm({
+    defaultValues: {
+      user: user._id,
+    },
+    mode: 'onSubmit',
+    });
 
     const dispatch = useDispatch();
+    const [uInfo, setUInfo] = useState(null);
 
-    const signup = async (payload) => {
+    console.log(user._id);
+    const addCover = async (payload) => {
         try {
-            const response = await apiRequest.post(`signup`, payload);
+            // user._id.push(payload);
+            const response = await apiRequest.post(`covers`, payload);
             dispatch(AuthActions.setAuth(response.data.data));
         } catch (error) {
             showToast(error?.response?.data?.message, 'error');
@@ -30,79 +42,82 @@ const Signup = () => {
             <ScrollView>
                 <Header />
                 <Container>
-                    <H2>Sign Up</H2>
-                    <form onSubmit={handleSubmit((values) => signup(values))}>
+                    <H2>Add Cover Letter</H2>
+                    <form onSubmit={handleSubmit((values) => addCover(values))}>
                         <Controller
-                            name="name"
+                            name="coverName"
                             control={control}
                             render={(field) => (
                                 <TextInput
                                     {...field}
+                                    label="Company Name"
                                     type="text"
-                                    placeholder="Enter Your Name"
+                                    placeholder="Enter Company Name"
                                     errors={errors}
+                                    value={ field.value || '' }
                                 />
                             )}
                             rules={{
-                                required: 'Name is required.',
+                                required: 'Company Name is required.',
                                 maxLength: {
-                                    value: 20,
+                                    value: 100,
                                     message: 'This input exceed maxLength.',
                                 },
                             }}
                         />
                         <Controller
-                            name="email"
+                            name="dear"
                             control={control}
                             render={(field) => (
                                 <TextInput
                                     {...field}
+                                    label="Dear:"
                                     type="text"
-                                    placeholder="Enter Your Email"
+                                    placeholder="Hiring Manager"
                                     errors={errors}
+                                    value={ field.value || '' }
                                 />
                             )}
-                            rules={{ required: 'Email is required.' }}
                         />
+
                         <Controller
-                            name="password"
+                            name="user"
                             control={control}
                             render={(field) => (
                                 <TextInput
                                     {...field}
-                                    type="password"
-                                    placeholder="Enter Your Password"
+                                    type="hidden"
                                     errors={errors}
+                                    value={ field.value || '' }
                                 />
                             )}
-                            rules={{ required: 'Password is required.' }}
                         />
+
+
                         <Controller
-                            name="confirm_password"
+                            name="letter"
                             control={control}
                             render={(field) => (
-                                <TextInput
+                                <TextArea
                                     {...field}
-                                    type="password"
-                                    placeholder="Enter Your Confirm Password"
+                                    label="Letter"
+                                    type="text"
+                                    placeholder="Enter Your Letter"
                                     errors={errors}
+                                    value={ field.value || '' }
                                 />
                             )}
-                            rules={{
-                                required: 'Comfirm Password is required.',
-                            }}
+                            rules={{ required: 'Letter is required.' }}
                         />
                         <Button
                             className="btn btn-secondary"
                             type="submit"
-                            disabled={isSubmitting}
+                            disabled={isSubmitSuccessful}
                         >
-                            {isSubmitting ? 'Submitting...' : 'Sign Up'}
+
+                            {isSubmitSuccessful ? 'Submitted' : 'Add Cover Letter'}
                         </Button>
-                        <div>
-                            Don&apos;t have an account?{' '}
-                            <Link to="/login">Login</Link>
-                        </div>
+
                     </form>
                 </Container>
             </ScrollView>
@@ -111,7 +126,7 @@ const Signup = () => {
     );
 };
 
-export default Signup;
+export default InsertCover;
 
 const ScrollView = styled.div`
     min-height: calc(100vh - 80px);

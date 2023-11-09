@@ -12,14 +12,14 @@ import {
 	PURGE,
 	REGISTER,
 } from 'redux-persist';
-import { api } from './services/api';
-import CoreReducer from './reducers/CoreReducer';
-import AuthReducer from './reducers/AuthReducer';
-import UserReducer from 'reducers/UserReducer';
+import { api } from './api/api';
+import CoreReducer from './core/CoreReducer';
+import AuthReducer from './auth/AuthReducer';
+import UserReducer from './user/UserReducer';
 
 const appReducer = combineReducers({
-	core: CoreReducer,
 	auth: AuthReducer,
+	core: CoreReducer,
 	user: UserReducer,
 	[api.reducerPath]: api.reducer,
 });

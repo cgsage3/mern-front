@@ -1,10 +1,10 @@
 import React, {useState, useEffect} from 'react';
-import { Header, Footer, TextInput, TextArea, H2, Button } from '../components';
+import { Header, Footer, TextInput, TextArea, H2, Button } from '../../components';
 import styled from 'styled-components';
 import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import apiRequest, { showToast } from '../Utilities';
-import { AuthActions } from '../reducers/AuthReducer';
+import apiRequest, { showToast } from '../../utils/Utilities';
+import { AuthActions } from '../../store/auth/AuthReducer';
 import { useForm, Controller } from 'react-hook-form';
 
 const EditCover = () => {

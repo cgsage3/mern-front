@@ -1,13 +1,13 @@
 import React from 'react';
-import { Header, Footer, H2 } from '../components';
+import { Header, Footer, H2 } from '../../components';
 import styled from 'styled-components';
 import { Link, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { AuthActions } from '../reducers/AuthReducer';
-import apiRequest, { showToast } from '../Utilities';
+import { AuthActions } from '../../store/auth/AuthReducer';
+import apiRequest, { showToast } from '../../utils/Utilities';
 import {
     useGetUserQuery,
-} from '../services/UserServices';
+} from '../../store/user/UserServices';
 
 const UserDetails = () => {
     const { userId } = useParams();

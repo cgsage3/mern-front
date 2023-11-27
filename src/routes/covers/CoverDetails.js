@@ -5,20 +5,15 @@ import { Link, useParams } from 'react-router-dom';
 import {
     useGetCoverQuery,
 } from '../../store/covers/CoverServices';
-import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
 import CoverOnly from './CoverOnly';
 
 
 const CoverDetails = () => {
-    const p = ReactHtmlParser;
     const url = new URL(window.location.href);
-    const params = new URLSearchParams(url.search);
-    const coverOnlyMode = params.get('coveronly');
 
     const { coverId } = useParams();
 
     const { data, isFetching } = useGetCoverQuery(coverId);
-    const coverIndex = data?.data?._id;
     const cName = data?.data?.coverName;
     console.log(data);
 

@@ -18,7 +18,12 @@ const Login = lazy(() => import('./routes/login/Login'));
 const Signup = lazy(() => import('./routes/signup/Signup'));
 const Dashboard = lazy(() => import('./routes/dashboard/Dashboard'));
 const NotFound = lazy(() => import('./components/NotFound'));
-const InsertResume = lazy(() => import('./routes/resumes/InsertResume'));
+const ViewResume = lazy(() => import('./routes/resumes/ViewResume'));
+const InsertBio = lazy(() => import('./routes/resumes/bio/InsertBio'));
+const InsertEducation = lazy(() => import('./routes/resumes/education/InsertEducation'));
+const InsertSkills = lazy(() => import('./routes/resumes/skills/InsertSkills'));
+const Resumes = lazy(()=> import('./routes/resumes/Resumes'));
+const InsertExperiences = lazy(() => import('./routes/resumes/experiences/InsertExperiences'));
 const Publisher= lazy(() => import('./routes/covers/Publisher'));
 const InsertCover = lazy(() => import('./routes/covers/InsertCover'));
 const EditCover = lazy(() => import('./routes/covers/editCover'));
@@ -96,13 +101,59 @@ const AppRoutes = () => {
                 />
                 <Route
                     exact={true}
-                    path="/insert-resume"
+                    path="/resumes"
                     element={
                         <PrivateRoute>
-                            <InsertResume />
+                            <Resumes />
                         </PrivateRoute>
                     }
                 />
+                <Route
+                    exact={true}
+                    path="/add-experiences"
+                    element={
+                        <PrivateRoute>
+                            <InsertExperiences />
+                        </PrivateRoute>
+                    }
+                />
+                <Route
+                    exact={true}
+                    path="/add-bio"
+                    element={
+                        <PrivateRoute>
+                            <InsertBio />
+                        </PrivateRoute>
+                    }
+                />
+                <Route
+                    exact={true}
+                    path="/add-edu"
+                    element={
+                        <PrivateRoute>
+                            <InsertEducation />
+                        </PrivateRoute>
+                    }
+                />
+                <Route
+                    exact={true}
+                    path="/add-skills"
+                    element={
+                        <PrivateRoute>
+                            <InsertSkills />
+                        </PrivateRoute>
+                    }
+                />
+                <Route
+                    exact={true}
+                    path="/view-resume"
+                    element={
+                        <PrivateRoute>
+                            <ViewResume />
+                        </PrivateRoute>
+                    }
+                />
+
                 <Route
                     exact={true}
                     path="/publisher"

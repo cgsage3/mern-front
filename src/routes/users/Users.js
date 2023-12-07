@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import {
     useGetUsersQuery,
-} from '../../store/user/UserServices';
+} from '../../services/users/UserServices';
 // import { api } from '../../store/api/api';
 import ReactPaginate from 'react-paginate';
 

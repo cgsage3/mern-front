@@ -1,4 +1,4 @@
-import { api } from '../api/api';
+import { api } from '../../store/api/api';
 
 export const PublishedService = api.injectEndpoints({
 

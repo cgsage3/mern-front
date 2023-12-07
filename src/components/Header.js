@@ -41,6 +41,9 @@ const Header = () => {
                                     <Link to="/publisher">Cover Letters</Link>
                                 </li>
                                 <li>
+                                    <Link to="/resumes">Resumes</Link>
+                                </li>
+                                <li>
                                     <a
                                         onClick={logout}
                                         href="javaScript:void(0)"

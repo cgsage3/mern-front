@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import {
     useGetCoverQuery,
-} from '../../store/covers/CoverServices';
+} from '../../services/covers/CoverServices';
 import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
 
 

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { Link, useParams } from 'react-router-dom';
 import {
     useGetCoverQuery,
-} from '../../store/covers/CoverServices';
+} from '../../services/covers/CoverServices';
 import CoverOnly from './CoverOnly';
 
 

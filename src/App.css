@@ -38,6 +38,10 @@ a:hover {
 .nav-wrapper ul li {
     margin: 0 15px 0  0;
 }
+.resume-wrapper
+{
+   margin: 0 auto;
+}
 .cl-wrapper div:hover {
     cursor: pointer;
     background-color: rgb(76, 132, 255);
@@ -256,7 +260,9 @@ a:hover {
     margin: 30px auto 16px;    
 }
 @media only screen and (min-width: 700px) {
-    .cl-wrapper > div {
+    .cl-wrapper > div,
+    .resume-wrapper
+    {
         width: 500px;
     }
 }

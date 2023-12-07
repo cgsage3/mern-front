@@ -5,7 +5,7 @@ import { useNavigate, Link, useParams } from 'react-router-dom';
 import {
     useGetPublisherAllQuery,
     useGetPublishersQuery,
-} from '../../store/covers/publishedServices';
+} from '../../services/covers/publishedServices';
 import { api } from '../../store/api/api';
 import ReactPaginate from 'react-paginate';
 import { useSelector } from 'react-redux';

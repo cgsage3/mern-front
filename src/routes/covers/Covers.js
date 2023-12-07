@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { useNavigate, Link } from 'react-router-dom';
 import {
     useGetCoversQuery,
-} from '../../store/covers/CoverServices';
+} from '../../services/covers/CoverServices';
 // import { api } from '../../store/api/api';
 import ReactPaginate from 'react-paginate';
 import { useSelector } from 'react-redux';

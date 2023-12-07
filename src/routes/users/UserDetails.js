@@ -7,7 +7,7 @@ import { AuthActions } from '../../store/auth/AuthReducer';
 import apiRequest, { showToast } from '../../utils/Utilities';
 import {
     useGetUserQuery,
-} from '../../store/user/UserServices';
+} from '../../services/users/UserServices';
 
 const UserDetails = () => {
     const { userId } = useParams();

@@ -11,14 +11,13 @@ const InsertBio = () => {
     const {
         handleSubmit,
         control,
-        register,
-        setValue,
+        reset,
+        formState,
         formState: { isSubmitSuccessful, errors },
     } = useForm({
     defaultValues: {
       user: user._id,
     },
-    mode: 'onSubmit',
     });
 
     // const dispatch = useDispatch();
@@ -32,14 +31,81 @@ const InsertBio = () => {
             showToast(error?.response?.data?.message, 'error');
         }
     };
-
+    React.useEffect(() => {
+        if (formState.isSubmitSuccessful) {
+          reset({
+            phone: '',
+            email: '',
+            website: '',
+            address: '',
+            biography: '',
+        });
+        }
+      }, [formState, reset]);
     return (
         <>
             <ScrollView>
                 <Header />
                 <Container>
-                    <H2>Add Biography</H2>
+                    <H2>Add Personal Information</H2>
                     <form onSubmit={handleSubmit((values) => addBio(values))}>
+                        <Controller
+                            name="phone"
+                            control={control}
+                            render={(field) => (
+                                <TextInput
+                                    {...field}
+                                    label="Phone"
+                                    type="number"
+                                    placeholder=""
+                                    errors={errors}
+                                    value={ field.value || '' }
+                                />
+                            )}
+                        />
+                        <Controller
+                            name="email"
+                            control={control}
+                            render={(field) => (
+                                <TextInput
+                                    {...field}
+                                    label="Email"
+                                    type="text"
+                                    placeholder=""
+                                    errors={errors}
+                                    value={ field.value || '' }
+                                />
+                            )}
+                        />
+                        <Controller
+                            name="website"
+                            control={control}
+                            render={(field) => (
+                                <TextInput
+                                    {...field}
+                                    label="Website"
+                                    type="text"
+                                    placeholder=""
+                                    errors={errors}
+                                    value={ field.value || '' }
+                                />
+                            )}
+                        />
+                        <Controller
+                            name="address"
+                            control={control}
+                            render={(field) => (
+                                <TextInput
+                                    {...field}
+                                    label="Address"
+                                    type="text"
+                                    placeholder=""
+                                    errors={errors}
+                                    value={ field.value || '' }
+                                />
+                            )}
+                        />
+
                         <Controller
                             name="biography"
                             control={control}
@@ -78,10 +144,8 @@ const InsertBio = () => {
                         <Button
                             className="btn btn-secondary"
                             type="submit"
-                            disabled={isSubmitSuccessful}
                         >
-
-                            {isSubmitSuccessful ? 'Submitted' : 'Add Biography'}
+                            Add Biography
                         </Button>
 
                     </form>

@@ -12,11 +12,8 @@ const InsertExperiences = () => {
     const {
         handleSubmit,
         control,
-        register,
         reset,
-        trigger,
-        setError,
-        setValue,
+
         formState: { isSubmitSuccessful, errors },
     } = useForm({
         defaultValues: {
@@ -34,6 +31,7 @@ const InsertExperiences = () => {
         try {
             // user._id.push(payload);
             const response = await apiRequest.post(`experience`, payload);
+            reset();
             // dispatch(AuthActions.setAuth(response.data.data));
         } catch (error) {
             showToast(error?.response?.data?.message, 'error');
@@ -133,10 +131,8 @@ const InsertExperiences = () => {
                         <Button
                             className="btn btn-secondary"
                             type="submit"
-                            disabled={isSubmitSuccessful}
                         >
-
-                            {isSubmitSuccessful ? 'Submitted' : 'Add Cover Letter'}
+                            Add Experiences
                         </Button>
 
                     </form>

@@ -19,7 +19,7 @@ export const ResumeServices = api.injectEndpoints({
 
         getBio: build.query({
             query: (id) => ({
-                url: `bio/${id}`,
+                url: `bio/`,
                 method: 'GET',
             }),
             providesTags: (result, error, id) => [{ type: 'Biography', id }],

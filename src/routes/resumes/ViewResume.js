@@ -1,99 +1,114 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Header, Footer, H2 } from '../../components';
 import styled from 'styled-components';
-import { useNavigate, Link } from 'react-router-dom';
-import {
-    useGetExperiencesQuery,
-    useGetBioQuery,
-    useGetEdusQuery,
-    useGetSkillsQuery,
-} from '../../services/resumes/ResumeServices';
-// import { api } from '../../store/api/api';
+import { Link, useParams } from 'react-router-dom';
+import ResumeOnly from './ResumeOnly';
+
 
 const ViewResume = () => {
-    const [page, setPage] = useState(0);
-    const navigate = useNavigate();
+    const { coverId } = useParams();
+    const [messagePdf, setMessagePdf] = useState('not clicked');
+    const [messageDel, setMessageDel] = useState(null);
+    const [spinner, setSpinner] = useState('hidden');
+    // const pdfUrl = `https://cover-letter-mern-back.onrender.com/uploads/cover${coverId}.pdf`;
+    const pdfUrl = `${process.env.REACT_APP_BACK_URL}/uploads/cover-${coverId}.pdf`;
+    const pdfName = `${coverId}.pdf`;
+console.log(pdfUrl);
+    const handleClick = async () => {
+        try {
+          const ping = await fetch(pdfUrl, { method: 'HEAD' });
+          console.log(ping);
+          if (ping.status == 404) {
+            setMessagePdf('not-found');
+          }
+          if (ping.status == 200) {
+            setMessagePdf('found');
+          }
+        } catch (err) {
+            // catch any unexpected errors
+            console.log(err);
+        }
+    };
+    const generate = async () => {
+        setSpinner('clicked');
+        try {
+            const response = await fetch(
+                `${process.env.REACT_APP_API_URL}/pdf/covers/${coverId}`,
+                setSpinner('finished'),
+            );
+            const r = await response.json();
+            console.log('r rep', r);
+        } catch (err) {
+            // catch any unexpected errors
+            console.log(err);
+        }
+    };
 
-    const { data, isFetching } = useGetExperiencesQuery(page + 1);
-    // console.log('data', data);
-    const resumeList = data?.data?.docs;
+    const delUrl = `${process.env.REACT_APP_API_URL}/covers/${coverId}`;
+    const delFile = async () => {
+        try {
+            const fetchResult = await fetch(delUrl, {
+             method: 'DELETE',
+            });
+            const result = await fetchResult.json();
 
-    const { data: bioRespond} = useGetBioQuery('6567a340e80d8a0aa96295b4');
-    const bio = bioRespond?.data?.biography;
+            if (fetchResult.ok) {
+              setMessageDel(result.message);
+              return result;
+            }
+            const responseError = {
+              type: 'Error',
+              message: result.message || 'Something went wrong',
+              data: result.data || '',
+              code: result.code || '',
+            };
 
-    const { data: eduRespond, isFetching: eduFetching } = useGetEdusQuery(page + 1);
-    const edu = eduRespond?.data?.docs;
-    console.log(edu);
+            let error = new Error();
+            error = { ...error, ...responseError };
+            throw (error);
+        } catch (e) {
+            setMessageDel('Failed deleting cover', e);
+            console.log('Failed deleting cover', e); // handle error
+        }
+    };
 
-    const { data: skillsRespond, isFetching: skillsFetching } = useGetSkillsQuery(page + 1);
-    const skills = skillsRespond?.data?.docs;
-    console.log(skills);
-
-    const [searchTerm, setSearchTerm] = useState('');
-
+    // console.log(bio.message);
     return (
         <>
-            <ScrollView>
-                <Header />
-                <Container className="resume-wrapper">
-                    <H2>Biography</H2>
+        <ScrollView>
+            <Header />
+            <Container>
+                <button className="click">
+                    <Link to={`/edit-cover/${coverId}`}>
+                        Edit Cover Letter
+                    </Link>
+                </button>
+                <button className="click" onClick={handleClick}>View Pdf</button>
                     <div>
-                        <p>{bio}</p>
-                    </div>
-                    <H2>Experiences</H2>
-                    {isFetching ? <div style={{ margin: '0 auto', width: '500px' }}><p>Loading...</p></div> :
+                        {messagePdf=='not-found' &&
                         <>
-                        <div style={{ padding: '10px', margin: '0 auto', marginBottom: '20px' }}>
-                            {resumeList.map((item, index) => {
-                                return <ul key={index}>
-                                    <li><b>Year:</b> {item.year}</li>
-                                    <li><b>Position:</b> {item.position}</li>
-                                    <li><b>Company:</b> {item.companyName}</li>
-                                    <li>
-                                        {item.details.map((item, index) => {
-                                             return <ul key={index}>
-                                                <li>{item}</li>
-                                             </ul>;
-                                        })}
-                                    </li>
-                                </ul>;
-                            })}
-                        </div>
+                            <p>no PDF found. Click button to generate pdf:</p>
+                            <button className="click" onClick={generate}>Generate Pdf</button>
+                            {spinner && (
+                            <p>{spinner}</p>
+                            )}
                         </>
-                    }
-                    <H2>Education</H2>
-                    {eduFetching ? <div style={{ margin: '0 auto', width: '500px' }}><p>Loading...</p></div> :
+                        }
+                        {messagePdf=='found' &&
                         <>
-                        <div style={{ padding: '10px', margin: '0 auto', marginBottom: '20px' }}>
-                            {edu.map((item, index) => {
-                                return <ul key={index}>
-                                    <li><b>year:</b> {item.year}</li>
-                                    <li><b>degree:</b> {item.degree}</li>
-                                    <li><b>field:</b> {item.field}</li>
-                                    <li><b>insitution:</b> {item.insitution}</li>
-                                    <li><b>address:</b> {item.address}</li>
-                                </ul>;
-                            })}
-                        </div>
-                        </>
-                    }
-                    <H2>Skills</H2>
-                    {skillsFetching ? <div style={{ margin: '0 auto', width: '500px' }}><p>Loading...</p></div> :
-                        <>
-                        <div style={{ padding: '10px', margin: '0 auto', marginBottom: '20px' }}>
-                            {skills.map((item, index) => {
-                                return <ul key={index}>
-                                    <li><b>category:</b> {item.category}</li>
-                                    <li><b>skills:</b> {item.skills}</li>
-                                </ul>;
-                            })}
-                        </div>
-                        </>
-                    }
+                        <a href={pdfUrl} download={pdfName}>Download Cover Letter Pdf</a>
 
-                </Container>
-            </ScrollView>
-            <Footer />
+                        </>
+                        }
+                    </div>
+                <ResumeOnly/>
+                <button className="click del" onClick={delFile}>
+                  Delete Cover Letter
+                </button>
+                <div>{messageDel}</div>
+            </Container>
+        </ScrollView>
+        <Footer />
         </>
     );
 };
@@ -106,5 +121,5 @@ const ScrollView = styled.div`
 
 const Container = styled.div`
     padding-top: 50px;
+    margin: 0 auto;
 `;
-

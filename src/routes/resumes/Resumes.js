@@ -17,7 +17,7 @@ const Resumes = () => {
                     </Link>
 
                     <Link to="/add-bio">
-                        <Button>Add biography</Button>
+                        <Button>Add personal info</Button>
                     </Link>
                     <Link to="/add-edu">
                         <Button>Add education</Button>

@@ -66,17 +66,17 @@ a:hover {
      margin: 5px 0 0;
      font-size: 40px;
      color:#ba0018;
-     padding: 0 10px 10px;
+     padding: 0 10px 10px 0;
      border-radius:2px;
     font-family: 'Poppins', serif;
 }
 .pdf-cover h2 { color: #ba0018;
 /*     width: 150px;*/
-    width: 100%;
+    /* width: 100%; */
      font-size: 18px;
-     padding-left: 10px;
-     padding-top: 12px;
-     margin-bottom: 0;
+     /* padding-left: 10px; */
+     /* padding-top: 12px;
+     margin-bottom: 0; */
      font-weight:700;
      font-family: 'Poppins', serif;
 }
@@ -86,7 +86,7 @@ a:hover {
      line-height: 28px;
      font-family: 'Poppins', serif;
 }
-.pdf-cover h2, .pdf-cover h3 { margin-top: 5px }
+.pdf-cover h2, .pdf-cover h3 { text-align: left;}
 .pdf-cover a { color: #ba0018;
     display: inline-block;
     text-decoration: none;
@@ -134,16 +134,21 @@ a:hover {
     width: 100%;
     font-size: 18px;
     line-height: 24px;
-    margin: 10px 0 10px;
-    padding: 0 10px;
+    /* margin: 10px 0 10px; */
+    /* padding: 0 10px; */
 /*    padding: 0 0 0 20px;*/
 }
-.subsection { margin: 10px 0 5px }
+.exp-section {
+    margin: 0 0 30px 0;
+}
+.subsection { margin: 10px 0 15px }
 .desc { 
     font-size: 16px; 
     font-family: 'Source Sans 3', sans-serif; 
     color:#101010;
     text-align: justify;
+    list-style-type: disc;
+    padding: 0 0 0 20px;
 }
 .contact-info { 
     font-size: 16px;
@@ -157,6 +162,28 @@ a:hover {
     font-family: 'Source Sans 3', sans-serif;
     text-transform:uppercase;
 }
+.flex-cont {
+    margin: 0 0 15px 0;
+}
+
+.skill-right {
+    display: flex;
+    align-items: baseline;
+}
+
+.skill-title {
+    font-size: 16px;
+    margin-right: 10px;
+    width: 20%;
+    text-transform: capitalize;
+}
+
+.skill-right p {
+    margin: 0;
+    width: 80%;
+    font-size: 16px;
+}
+
 /*
  Float Rules
 */

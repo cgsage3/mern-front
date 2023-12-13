@@ -7,7 +7,7 @@ import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from
 
 
 const CoverOnly = () => {
-    const p = ReactHtmlParser;
+    const parser = ReactHtmlParser;
 
     const { coverId } = useParams();
 
@@ -42,7 +42,7 @@ const CoverOnly = () => {
 
                                     <h4>Dear {data?.data?.dear},</h4>
                                     <div id="cletter">
-                                        {p(data?.data?.letter)}
+                                        {parser(data?.data?.letter)}
                                     </div>
 
                                     <p>Sincerely,</p>

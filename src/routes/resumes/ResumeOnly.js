@@ -27,8 +27,18 @@ const ResumeOnly = () => {
     const bio = bioRespond?.data[0];
     console.log(user);
 
+    const formatPhoneNumber = function(phoneNumberString) {
+        const cleaned = ('' + phoneNumberString).replace(/\D/g, '');
+        const match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
+        if (match) {
+          return '(' + match[1] + ') ' + match[2] + ' - ' + match[3];
+        }
+        return null;
+    };
+
+
     const { data: experience, isFetching } = useGetExperiencesQuery(page + 1);// get data from experience doc, create new const named experience
-    const experienceList = experience?.data?.docs;// get expirience data conditionally if data exists
+    const experienceList = experience?.data?.docs;// get experience data conditionally if data exists
 
     const sortedExperience = experienceList?.slice().sort(compare);// create shallow copy then sort using compare function
     // console.log('experience', experienceList);
@@ -42,11 +52,19 @@ const ResumeOnly = () => {
 
     const { data: skillsRespond, isFetching: skillsFetching } = useGetSkillsQuery(page + 1);
     const skills = skillsRespond?.data?.docs;
-    // console.log(skills);
+    console.log(skills);
+
+    const importOrder = ['languages', 'technologies', 'database ', 'miscellaneous'];
+    const sortedSkills = skills?.slice().sort(
+        (a, b) => importOrder.indexOf(a.category) + importOrder.indexOf(b.category),
+      );
+
     const openInNewTab = () => {
         const newWindow = window.open('https://'+ bio.website, '_blank', 'noopener,noreferrer');
         if (newWindow) newWindow.opener = null;
      };
+
+    const rName = user?.name ? user.name :'Cesar Granda';
     return (
         <>
             <div id="pdf" className="pdf-cover">
@@ -55,9 +73,9 @@ const ResumeOnly = () => {
                     <div className="page">
                         { bioFetch ? <div style={{ margin: '0 auto', width: '500px' }}><p>Loading...</p></div> :
                         <div className="section row">
-                            <h1 className="col"><span className="myname">{user.name}</span> </h1>
+                            <h1 className="col"><span className="myname">{rName}</span> </h1>
                             <div className="contact-info col-right">
-                                <div>{bio.phone}</div>
+                                <div>{formatPhoneNumber(bio.phone)}</div>
                                 <div><a href="mailto:info@cgranda.com">{bio.email}</a></div>
                                 <div>
                                     <Link href="#" onClick = {openInNewTab}>{bio.website}</Link>
@@ -68,7 +86,7 @@ const ResumeOnly = () => {
                         <div className="section row">
                             { bioFetch ? <div style={{ margin: '0 auto', width: '500px' }}><p>Loading...</p></div> :
                                 <div className="col light">
-                                    <p>Phone: {bio.phone} I Email: {bio.email} I Address: {bio.address} </p>
+                                    <p>Phone: {formatPhoneNumber(bio.phone)} I Email: {bio.email} I Address: {bio.address} </p>
                                 </div>
                             }
                         </div>
@@ -88,7 +106,7 @@ const ResumeOnly = () => {
                                 <>
                                 <div className="section-text col-right row">
                                     <div className="flex-cont">
-                                        {skills.map((item, index) => {
+                                        {sortedSkills.map((item, index) => {
                                             return <div key={item.category} className="skill-right">
                                                 <h3 className="skill-title">{item.category} : </h3><p>{item.skills}</p>
                                             </div>;

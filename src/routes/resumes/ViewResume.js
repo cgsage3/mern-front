@@ -11,7 +11,7 @@ const ViewResume = () => {
     const [messageDel, setMessageDel] = useState(null);
     const [spinner, setSpinner] = useState('hidden');
     // const pdfUrl = `https://cover-letter-mern-back.onrender.com/uploads/cover${coverId}.pdf`;
-    const pdfUrl = `${process.env.REACT_APP_BACK_URL}/uploads/cover-${coverId}.pdf`;
+    const pdfUrl = `${process.env.REACT_APP_BACK_URL}/uploads/resume.pdf`;
     const pdfName = `${coverId}.pdf`;
 console.log(pdfUrl);
     const handleClick = async () => {
@@ -33,7 +33,7 @@ console.log(pdfUrl);
         setSpinner('clicked');
         try {
             const response = await fetch(
-                `${process.env.REACT_APP_API_URL}/pdf/covers/${coverId}`,
+                `${process.env.REACT_APP_API_URL}/pdf/resume`,
                 setSpinner('finished'),
             );
             const r = await response.json();
@@ -96,7 +96,7 @@ console.log(pdfUrl);
                         }
                         {messagePdf=='found' &&
                         <>
-                        <a href={pdfUrl} download={pdfName}>Download Cover Letter Pdf</a>
+                        <a href={pdfUrl} download="resume">Download Cover Letter Pdf</a>
 
                         </>
                         }

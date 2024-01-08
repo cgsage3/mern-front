@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import apiRequest, { showToast } from '../../utils/Utilities';
-import { AuthActions } from '../../store/auth/AuthReducer';
 import { useForm, Controller } from 'react-hook-form';
 
 const EditCover = () => {

@@ -24,6 +24,7 @@ const InsertEducation = lazy(() => import('./routes/resumes/education/InsertEduc
 const InsertSkills = lazy(() => import('./routes/resumes/skills/InsertSkills'));
 const Resumes = lazy(()=> import('./routes/resumes/Resumes'));
 const InsertExperiences = lazy(() => import('./routes/resumes/experiences/InsertExperiences'));
+const ResumeOnly = lazy(() => import('./routes/resumes/ResumeOnly'));
 const Publisher= lazy(() => import('./routes/covers/Publisher'));
 const InsertCover = lazy(() => import('./routes/covers/InsertCover'));
 const EditCover = lazy(() => import('./routes/covers/editCover'));
@@ -153,7 +154,13 @@ const AppRoutes = () => {
                         </PrivateRoute>
                     }
                 />
-
+                <Route
+                    exact={true}
+                    path="/view-resume/only"
+                    element={
+                        <ResumeOnly />
+                    }
+                />
                 <Route
                     exact={true}
                     path="/publisher"
@@ -180,6 +187,7 @@ const AppRoutes = () => {
                         <CoverOnly />
                     }
                 />
+
                 <Route
                     exact={true}
                     path="/covers/:coverId"

@@ -10,8 +10,8 @@ import Select from 'react-select';
 const options = [
     { value: 'languages', label: 'Languages' },
     { value: 'technologies', label: 'Technologies' },
-    { value: 'databse', label: 'Database' },
-    { value: 'misc', label: 'Miscellaneous' },
+    { value: 'database', label: 'Database' },
+    { value: 'miscellaneous ', label: 'Miscellaneous' },
   ];
 
 const InsertSkills = () => {

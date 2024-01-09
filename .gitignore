@@ -16,6 +16,7 @@ out/
 # production
 build
 production
+public
 
 # misc
 .DS_Store

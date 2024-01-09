@@ -32,7 +32,7 @@ console.log(pdfUrl);
             setMessagePdf('not-found');
           }
           if (ping.status == 200) {
-            setMessagePdf('not-found');
+            setMessagePdf('found');
           }
         } catch (err) {
             // catch any unexpected errors

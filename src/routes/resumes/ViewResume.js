@@ -80,7 +80,7 @@ console.log(pdfUrl);
             <Container>
                 <button className="click">
                     <Link to={`/edit-cover/${coverId}`}>
-                        Edit Cover Letter
+                        Edit Resume
                     </Link>
                 </button>
                 <button className="click" onClick={handleClick}>View Pdf</button>

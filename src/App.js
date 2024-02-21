@@ -20,6 +20,9 @@ const Dashboard = lazy(() => import('./routes/dashboard/Dashboard'));
 const NotFound = lazy(() => import('./components/NotFound'));
 const ViewResume = lazy(() => import('./routes/resumes/ViewResume'));
 const InsertBio = lazy(() => import('./routes/resumes/bio/InsertBio'));
+const EditBio = lazy(() => import('./routes/resumes/bio/EditBio'));
+const ViewBio = lazy(() => import('./routes/resumes/bio/ViewBio'));
+const BioAll = lazy(() => import('./routes/resumes/bio/BioAll'));
 const InsertEducation = lazy(() => import('./routes/resumes/education/InsertEducation'));
 const InsertSkills = lazy(() => import('./routes/resumes/skills/InsertSkills'));
 const Resumes = lazy(()=> import('./routes/resumes/Resumes'));
@@ -124,6 +127,33 @@ const AppRoutes = () => {
                     element={
                         <PrivateRoute>
                             <InsertBio />
+                        </PrivateRoute>
+                    }
+                />
+                <Route
+                    exact={true}
+                    path="/bio/edit/:bioId"
+                    element={
+                        <PrivateRoute>
+                            <EditBio />
+                        </PrivateRoute>
+                    }
+                />
+                <Route
+                    exact={true}
+                    path="/bio/:bioId"
+                    element={
+                        <PrivateRoute>
+                            <ViewBio />
+                        </PrivateRoute>
+                    }
+                />
+                <Route
+                    exact={true}
+                    path="/bio/"
+                    element={
+                        <PrivateRoute>
+                            <BioAll />
                         </PrivateRoute>
                     }
                 />

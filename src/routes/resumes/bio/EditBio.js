@@ -1,20 +1,21 @@
 import React, {useState, useEffect} from 'react';
-import { Header, Footer, TextInput, TextArea, H2, Button } from '../../components';
+import { Header, Footer, TextInput, TextArea, H2, Button } from '../../../components';
 import styled from 'styled-components';
 import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import apiRequest, { showToast } from '../../utils/Utilities';
+import apiRequest, { showToast } from '../../../utils/Utilities';
 import { useForm, Controller } from 'react-hook-form';
 
-const EditCover = () => {
-    const { coverId } = useParams();
+const EditBio = () => {
+    const { bioId } = useParams();
+    console.log(bioId);
     const user = useSelector((state) => state.auth.user);
     const [totalP, setTotalP] = useState([]);
     useEffect(()=> {
       totalMDB();
     }, []);
     const totalMDB = async () => {
-        fetch(`${process.env.REACT_APP_API_URL}/covers/` + coverId)
+        fetch(`${process.env.REACT_APP_API_URL}/bio/` + bioId)
         .then((response) => {
             return response.json(); // << This is the problem
         })
@@ -45,7 +46,7 @@ const EditCover = () => {
 
     const edit = async (payload) => {
         try {
-            const response = await apiRequest.put(`covers/` + coverId, payload);
+            const response = await apiRequest.put(`bio/` + bioId, payload);
             // dispatch(AuthActions.setAuth(response.data.data));
         } catch (error) {
             showToast(error?.response?.data?.message, 'error');
@@ -60,19 +61,16 @@ const EditCover = () => {
                 <Header />
                 <Container>
 
-                    {
-                        totalP.user === user._id ?
-                        <>
                     <H2>Update Cover Letter</H2>
                     <form onSubmit={handleSubmit((values) => edit(values))}>
                         <Controller
                             defaultValue = {''}
-                            name="coverName"
+                            name="phone"
                             control={control}
                             render={(field) => (
                                 <TextInput
                                     {...field}
-                                    label="Company Name:"
+                                    label="Phone Number:"
                                     type="text"
                                     errors={errors}
                                 />
@@ -80,12 +78,38 @@ const EditCover = () => {
                         />
                         <Controller
                             defaultValue = {''}
-                            name="dear"
+                            name="email"
                             control={control}
                             render={(field) => (
                                 <TextInput
                                     {...field}
-                                    label="Dear:"
+                                    label="Email:"
+                                    type="text"
+                                    errors={errors}
+                                />
+                            )}
+                        />
+                        <Controller
+                            defaultValue = {''}
+                            name="website"
+                            control={control}
+                            render={(field) => (
+                                <TextInput
+                                    {...field}
+                                    label="Website:"
+                                    type="text"
+                                    errors={errors}
+                                />
+                            )}
+                        />
+                        <Controller
+                            defaultValue = {''}
+                            name="address"
+                            control={control}
+                            render={(field) => (
+                                <TextInput
+                                    {...field}
+                                    label="Address:"
                                     type="text"
                                     errors={errors}
                                 />
@@ -105,12 +129,12 @@ const EditCover = () => {
                         />
                         <Controller
                             defaultValue = {''}
-                            name="letter"
+                            name="biography"
                             control={control}
                             render={(field) => (
                                 <TextArea
                                     {...field}
-                                    label="Letter:"
+                                    label="Biography:"
                                     type="text"
                                     errors={errors}
                                 />
@@ -126,9 +150,7 @@ const EditCover = () => {
                         </Button>
 
                     </form>
-                    </>:
-                    <h1>Not the owner of this cover letter</h1>
-                    }
+
                 </Container>
             </ScrollView>
             <Footer />
@@ -136,7 +158,7 @@ const EditCover = () => {
     );
 };
 
-export default EditCover;
+export default EditBio;
 
 const ScrollView = styled.div`
     min-height: calc(100vh - 80px);

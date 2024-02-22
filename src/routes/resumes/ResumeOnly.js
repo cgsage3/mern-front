@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
 import {
     useGetExperiencesQuery,
-    useGetBioQuery,
+    useGetBioNoIdQuery,
     useGetEdusQuery,
     useGetSkillsQuery,
 } from '../../services/resumes/ResumeServices';
@@ -23,9 +23,9 @@ const ResumeOnly = () => {
     };
 
 
-    const { data: bioRespond, isFetching: bioFetch} = useGetBioQuery();
+    const { data: bioRespond, isFetching: bioFetch} = useGetBioNoIdQuery();
     const bio = bioRespond?.data[0];
-    console.log(user);
+    console.log(bioRespond);
 
     const formatPhoneNumber = function(phoneNumberString) {
         const cleaned = ('' + phoneNumberString).replace(/\D/g, '');

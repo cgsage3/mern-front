@@ -24,7 +24,13 @@ export const ResumeServices = api.injectEndpoints({
             }),
             providesTags: (result, error, id) => [{ type: 'Biography', id }],
         }),
-
+        getBioNoId: build.query({
+            query: () => ({
+                url: `bio/`,
+                method: 'GET',
+            }),
+            providesTags: (result, error, id) => [{ type: 'Biography', id }],
+        }),
         getBioAll: build.query({
             query: (id) => ({
                 url: `bioAll`,
@@ -59,4 +65,5 @@ export const {
     useGetEdusQuery,
     useGetSkillsQuery,
     useGetBioAllQuery,
+    useGetBioNoIdQuery,
 } = ResumeServices;

@@ -102,6 +102,7 @@ a:hover {
 .pdf-cover h4 {
     margin: 24px 0;
     font-weight: bold;
+    font-size: 16px;
 }
 
 .myname {
@@ -275,6 +276,7 @@ a:hover {
     margin: 18px 0;
     line-height: 24px;
     text-align: justify;
+    font-size: 16px;
 }
 
 .click {

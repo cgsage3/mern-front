@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import {H2 } from '../../components';
 import { Link, useParams } from 'react-router-dom';
 import {
     useGetCoverQuery,
@@ -35,7 +36,7 @@ const CoverOnly = () => {
                                 </div>
                             </div>
 
-                            <h2 className="coverletter">Cover Letter</h2>
+                            <H2 className="coverletter">Cover Letter</H2>
 
                             <div className="section-text col-right row cletter-wrapper">
                                 <div className="col">

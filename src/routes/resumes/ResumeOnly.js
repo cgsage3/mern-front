@@ -101,23 +101,7 @@ const ResumeOnly = () => {
                         </div>
                         }
                         <div className="section row">
-                            <H2 className="col">Technical Skills</H2>
-                            {skillsFetching ? <div style={{ margin: '0 auto', width: '500px' }}><p>Loading...</p></div> :
-                                <>
-                                <div className="section-text col-right row">
-                                    <div className="flex-cont">
-                                        {sortedSkills.map((item, index) => {
-                                            return <div key={item.category} className="skill-right">
-                                                <h3 className="skill-title">{item.category} : </h3><p>{item.skills}</p>
-                                            </div>;
-                                        })}
-                                    </div>
-                                </div>
-                                </>
-                            }
-                        </div>
-                        <div className="section row">
-                            <H2 className="col">Experience</H2>
+                            <H2 className="col">Work Experience</H2>
                             {isFetching ? <div style={{ margin: '0 auto', width: '500px' }}><p>Loading...</p></div> :
                                 <>
                                 <div className='section-text col-right'>
@@ -160,6 +144,22 @@ const ResumeOnly = () => {
                                             </div>
                                         </div>;
                                     })}
+                                </div>
+                                </>
+                            }
+                        </div>
+                        <div className="section row">
+                            <H2 className="col">Technologies and Languages</H2>
+                            {skillsFetching ? <div style={{ margin: '0 auto', width: '500px' }}><p>Loading...</p></div> :
+                                <>
+                                <div className="section-text col-right row">
+                                    <div className="flex-cont">
+                                        {sortedSkills.map((item, index) => {
+                                            return <div key={item.category} className="skill-right">
+                                                <h3 className="skill-title">{item.category} : </h3><p>{item.skills}</p>
+                                            </div>;
+                                        })}
+                                    </div>
                                 </div>
                                 </>
                             }

@@ -123,7 +123,7 @@ const AppRoutes = () => {
                 />
                 <Route
                     exact={true}
-                    path="/add-bio"
+                    path="/bio/add-bio"
                     element={
                         <PrivateRoute>
                             <InsertBio />

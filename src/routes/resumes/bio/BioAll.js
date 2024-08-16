@@ -1,18 +1,23 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Header, Footer } from '../../../components';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
 import {
     useGetBioAllQuery,
+    useGetBiouserQuery,
 } from '../../../services/resumes/ResumeServices';
 
 const BioAll = () => {
     const user = useSelector((state) => state.auth.user);
+    const [page, setPage] = useState(0);
+    const [limit, setLimit] = useState(5);// used to set number of documents per page
+
     const navigate = useNavigate();
-    const { data: bioRespond, isFetching: bioFetch} = useGetBioAllQuery();
-    const bio = bioRespond?.data?.docs;
-    console.log(bio);
+    // const { data: bioRespond, isFetching: bioFetch} = useGetBioAllQuery();
+    const { data: bioRespond, isFetching: bioFetch } = useGetBiouserQuery({id: user._id, page: page + 1, limit: limit});
+    const bio = bioRespond?.data?.userBio;
+    console.log(bioRespond);
     return (
         <>
             <ScrollView>

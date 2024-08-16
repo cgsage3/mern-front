@@ -24,6 +24,20 @@ export const ResumeServices = api.injectEndpoints({
             }),
             providesTags: (result, error, id) => [{ type: 'Biography', id }],
         }),
+
+        getBiouser: build.query({
+            query: (args) => {
+                // Destructuring Object
+                const { id, page, limit } = args;
+                return {
+                    // Returns url with multiple args
+                    url: `bioUser/${id}?page=${page}&limit=${limit}`,
+                };
+            },
+            // query: (id, page) => `publish/${id}?page=${page}`,
+            providesTags: (result) => result?.data?.coversPublished ? result.data?.coversPublished.map(({ _id }) => ({ type: 'userBio', _id })) : [],
+        }),
+
         getBioNoId: build.query({
             query: () => ({
                 url: `bio/`,
@@ -62,6 +76,7 @@ export const {
     useGetExperienceQuery,
     useGetExperiencesQuery,
     useGetBioQuery,
+    useGetBiouserQuery,
     useGetEdusQuery,
     useGetSkillsQuery,
     useGetBioAllQuery,

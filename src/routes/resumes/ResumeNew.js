@@ -72,19 +72,24 @@ const ResumeOnly = () => {
                 <>
                     <div className="page">
                         { bioFetch ? <div style={{ margin: '0 auto', width: '500px' }}><p>Loading...</p></div> :
-                        <div className="row">
-                            <h1>{rName} </h1>
-                            <div className="contact-info">
-                            { bioFetch ? <div style={{ margin: '0 auto', width: '500px' }}><p>Loading...</p></div> :
+                        <div className="section row">
+                            <h1 className="col"><span className="myname">{rName}</span> </h1>
+                            <div className="contact-info col-right">
+                                <div>{formatPhoneNumber(bio.phone)}</div>
+                                <div><a href="mailto:info@cgranda.com">{bio.email}</a></div>
                                 <div>
-                                    <p>Phone: {formatPhoneNumber(bio.phone)}</p>
-                                    <p>Email: {bio.email}</p>
-                                    <p>Address: {bio.address} </p>
+                                    <Link href="#" onClick = {openInNewTab}>{bio.website}</Link>
                                 </div>
-                            }
                             </div>
                         </div>
                         }
+                        <div className="section row">
+                            { bioFetch ? <div style={{ margin: '0 auto', width: '500px' }}><p>Loading...</p></div> :
+                                <div className="col light">
+                                    <p>Phone: {formatPhoneNumber(bio.phone)} I Email: {bio.email} I Address: {bio.address} </p>
+                                </div>
+                            }
+                        </div>
                         { bioFetch ? <div style={{ margin: '0 auto', width: '500px' }}><p>Loading...</p></div> :
                         <div className="section row">
                             <H2 className="col">Summary</H2>
@@ -114,7 +119,7 @@ const ResumeOnly = () => {
                                             <ul className="desc">
                                                 {item.details.map((item, index) => {
                                                     return (
-                                                        <li key={index}><span className="itemWrap">{item}</span></li>
+                                                        <li key={index}>{item}</li>
                                                     );
                                                 })}
                                             </ul>

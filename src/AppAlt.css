@@ -9,7 +9,7 @@ body {
 }
 
 * {
-    /* font-family: 'Montserrat'; */
+    font-family: 'Montserrat';
     font-display: swap;
 }
 
@@ -56,42 +56,40 @@ a:hover {
     padding: 0;
     background-color: #fff;
     font-size: 12px;
-    font-family: 'Tinos', sans-serif;
+    font-family: 'Source Sans 3', sans-serif;
     -webkit-font-smoothing: subpixel-antialiased;       
 }
 .pdf-cover * {
-    font-family: "Tinos", sans-serif;
+    font-family: "Source Sans 3", sans-serif;
 }
-.pdf-cover h1 { 
-    font-weight: bold;
+.pdf-cover h1 { font-weight: 300;
      margin: 5px 0 0;
      font-size: 40px;
+     color:#ba0018;
      padding: 0 10px 10px 0;
      border-radius:2px;
-    font-family: 'Tinos', serif;
-    text-align: center;
+    font-family: 'Poppins', serif;
 }
-.pdf-cover h2 { 
+.pdf-cover h2 { color: #ba0018;
 /*     width: 150px;*/
     /* width: 100%; */
-     /* font-size: 18px; */
+     font-size: 18px;
      /* padding-left: 10px; */
      /* padding-top: 12px;
      margin-bottom: 0; */
-     /* font-weight:700; */
-     font-family: 'Tinos', serif;
+     font-weight:700;
+     font-family: 'Poppins', serif;
      margin: 10px 0;
-     border-bottom: 1px solid;
 }
 .pdf-cover  h3 {
      font-weight: bold;
      margin-bottom: 0;
      line-height: 28px;
-     font-family: 'Tinos', serif;
+     font-family: 'Poppins', serif;
      margin-top: 5px;
 }
-/* .pdf-cover h2, .pdf-cover h3 { text-align: left;} */
-.pdf-cover a { 
+.pdf-cover h2, .pdf-cover h3 { text-align: left;}
+.pdf-cover a { color: #ba0018;
     display: inline-block;
     text-decoration: none;
     padding:2px 4px;
@@ -110,12 +108,11 @@ a:hover {
 
 .myname {
     font-weight:700;
-    font-family: 'Tinos', serif;
+    font-family: 'Poppins', serif;
 }
 .bio-text {
     font-size: 16px;
-    line-height: normal;
-    /* text-align: justify; */
+    text-align: justify;
     /* margin-bottom: 15px; */
 }
 
@@ -131,16 +128,15 @@ a:hover {
                font-size: 7pt;
 }
 .key:first-child::before { content: '' }
-.section { 
-    /* border-bottom: 1px solid #000; */
-    padding: 10px 0 10px;
+.section { border-bottom: 1px solid #ddd;
+           padding: 10px 0 10px;
 }
 .section:last-child { border: none }
 .section-text { 
 /*  width: 80%;*/
     width: 100%;
     font-size: 16px;
-    line-height: 20px;
+    line-height: 24px;
     /* margin: 10px 0 10px; */
     /* padding: 0 10px; */
 /*    padding: 0 0 0 20px;*/
@@ -149,40 +145,28 @@ a:hover {
     margin: 0 0 20px 0;
 }
 .exp-section h3 {
-    font-size: 22px;;
+    font-size: 15px;;
 }
-.emph.col {font-style: italic;}
-/* .subsection { margin: 10px 0 15px } */
+.subsection { margin: 10px 0 15px }
 .desc { 
-    /* font-size: 13px;  */
-    font-family: 'Tinos', sans-serif; 
+    font-size: 16px; 
+    font-family: 'Source Sans 3', sans-serif; 
     color:#101010;
     text-align: justify;
     list-style-type: disc;
     padding: 0 0 0 20px;
-    margin-left: 25px;
 }
-.itemWrap {
-    display: block;
-    margin-left: 5px ;
-}
-/* .desc li::before {
-    content: '•';
-    display: inline-block;
-    width: 10px;
-    margin-right: 20px;
-} */
 .contact-info { 
     font-size: 16px;
-    text-align: center;
+    text-align: right;
 }
 .light { 
-    /* color: #8b8b8b;
+    color: #8b8b8b;
     letter-spacing:1px;
     font-size: 14px;
     line-height:28px;
-    font-family: 'Tinos', sans-serif;
-    text-transform:uppercase; */
+    font-family: 'Source Sans 3', sans-serif;
+    text-transform:uppercase;
 }
 .flex-cont {
     margin: 0 0 15px 0;

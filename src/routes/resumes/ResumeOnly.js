@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import {H2 } from '../../components';
+import Summary from './resumeDisplay/Summary';
+import Experience from './resumeDisplay/Experience';
+import Education from './resumeDisplay/Education';
+import Skills from './resumeDisplay/Skills';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
@@ -27,16 +31,6 @@ const ResumeOnly = () => {
     const bio = bioRespond?.data[0];
     console.log(bioRespond);
 
-    const formatPhoneNumber = function(phoneNumberString) {
-        const cleaned = ('' + phoneNumberString).replace(/\D/g, '');
-        const match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
-        if (match) {
-          return '(' + match[1] + ') ' + match[2] + ' - ' + match[3];
-        }
-        return null;
-    };
-
-
     const { data: experience, isFetching } = useGetExperiencesQuery(page + 1);// get data from experience doc, create new const named experience
     const experienceList = experience?.data?.docs;// get experience data conditionally if data exists
 
@@ -52,7 +46,7 @@ const ResumeOnly = () => {
 
     const { data: skillsRespond, isFetching: skillsFetching } = useGetSkillsQuery(page + 1);
     const skills = skillsRespond?.data?.docs;
-    console.log(skills);
+    console.log(skillsFetching);
 
     const importOrder = ['languages', 'technologies', 'database ', 'miscellaneous'];
     const sortedSkills = skills?.slice().sort(
@@ -64,7 +58,6 @@ const ResumeOnly = () => {
         if (newWindow) newWindow.opener = null;
      };
 
-    const rName = user?.name ? user.name :'Cesar Granda';
     return (
         <>
             <div id="pdf" className="pdf-cover">
@@ -72,93 +65,17 @@ const ResumeOnly = () => {
                 <>
                     <div className="page">
                         { bioFetch ? <div style={{ margin: '0 auto', width: '500px' }}><p>Loading...</p></div> :
-                        <div className="row">
-                            <h1>{rName} </h1>
-                            <div className="contact-info">
-                            { bioFetch ? <div style={{ margin: '0 auto', width: '500px' }}><p>Loading...</p></div> :
-                                <div>
-                                    <p>Phone: {formatPhoneNumber(bio.phone)}</p>
-                                    <p>Email: {bio.email}</p>
-                                    <p>Address: {bio.address} </p>
-                                </div>
-                            }
-                            </div>
-                        </div>
+                            <Summary user={user} bio={bioRespond}/>
                         }
-                        { bioFetch ? <div style={{ margin: '0 auto', width: '500px' }}><p>Loading...</p></div> :
-                        <div className="section row">
-                            <H2 className="col">Summary</H2>
-                            <div className="section-text col-right row">
-                                <div className="bio-text">
-                                    {bio.biography}
-                                </div>
-                            </div>
-                        </div>
+                        {isFetching ? <div style={{ margin: '0 auto', width: '500px' }}><p>Loading...</p></div> :
+                            <Experience experience={sortedExperience}/>
                         }
-                        <div className="section row">
-                            <H2 className="col">Work Experience</H2>
-                            {isFetching ? <div style={{ margin: '0 auto', width: '500px' }}><p>Loading...</p></div> :
-                                <>
-                                <div className='section-text col-right'>
-                                    {sortedExperience.map((item, index) => {
-                                        return <div className="exp-section" key={index}>
-                                            <div className='row'>
-                                                <div className='col'>
-                                                    <h3>{item.companyName}</h3>
-                                                </div>
-                                            </div>
-                                            <div className="row subsection">
-                                                <div className="emph col">{item.position}</div>
-                                                <div className="col-right light">{item.year}</div>
-                                            </div>
-                                            <ul className="desc">
-                                                {item.details.map((item, index) => {
-                                                    return (
-                                                        <li key={index}><span className="itemWrap">{item}</span></li>
-                                                    );
-                                                })}
-                                            </ul>
-                                        </div>;
-                                    })}
-                                </div>
-                                </>
-                            }
-                        </div>
-                        <div className="section row">
-                            <H2>Education</H2>
-                            {eduFetching ? <div style={{ margin: '0 auto', width: '500px' }}><p>Loading...</p></div> :
-                                <>
-                                <div>
-                                    {sortedEdu.map((item, index) => {
-                                        return <div className="section-text col-right row" key={index}>
-                                            <h3>{item.degree} - {item.field}</h3>
-                                            <div>{item.institution}</div>
-                                            <div className="row">
-                                                <div className="col light">{item.address}</div>
-                                                <div className="col-right light">{item.year}</div>
-                                            </div>
-                                        </div>;
-                                    })}
-                                </div>
-                                </>
-                            }
-                        </div>
-                        <div className="section row">
-                            <H2 className="col">Technologies and Languages</H2>
-                            {skillsFetching ? <div style={{ margin: '0 auto', width: '500px' }}><p>Loading...</p></div> :
-                                <>
-                                <div className="section-text col-right row">
-                                    <div className="flex-cont">
-                                        {sortedSkills.map((item, index) => {
-                                            return <div key={item.category} className="skill-right">
-                                                <h3 className="skill-title">{item.category} : </h3><p>{item.skills}</p>
-                                            </div>;
-                                        })}
-                                    </div>
-                                </div>
-                                </>
-                            }
-                        </div>
+                        {skillsFetching ? <div style={{ margin: '0 auto', width: '500px' }}><p>Loading...</p></div> :
+                            <Skills skills={sortedSkills} fetching={skillsFetching}/>
+                        }
+                        {eduFetching ? <div style={{ margin: '0 auto', width: '500px' }}><p>Loading...</p></div> :
+                            <Education education={sortedEdu}/>
+                        }
                     </div>
                 </>
             </div>

@@ -12,6 +12,10 @@ const options = [
     { value: 'technologies', label: 'Technologies' },
     { value: 'database', label: 'Database' },
     { value: 'miscellaneous ', label: 'Miscellaneous' },
+    { value: 'Frontend Technologies', label: 'Frontend Technologies' },
+    { value: 'Backend Technologies:', label: 'Backend Technologies' },
+    { value: 'Programming Languages', label: 'Programming Languages' },
+    { value: 'Additional Skills ', label: 'Additional Skills' },
   ];
 
 const InsertSkills = () => {

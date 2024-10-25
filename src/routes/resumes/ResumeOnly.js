@@ -48,11 +48,6 @@ const ResumeOnly = () => {
     const skills = skillsRespond?.data?.docs;
     console.log(skillsFetching);
 
-    const importOrder = ['languages', 'technologies', 'database ', 'miscellaneous'];
-    const sortedSkills = skills?.slice().sort(
-        (a, b) => importOrder.indexOf(a.category) + importOrder.indexOf(b.category),
-      );
-
     const openInNewTab = () => {
         const newWindow = window.open('https://'+ bio.website, '_blank', 'noopener,noreferrer');
         if (newWindow) newWindow.opener = null;
@@ -67,11 +62,11 @@ const ResumeOnly = () => {
                         { bioFetch ? <div style={{ margin: '0 auto', width: '500px' }}><p>Loading...</p></div> :
                             <Summary user={user} bio={bioRespond}/>
                         }
+                        {skillsFetching ? <div style={{ margin: '0 auto', width: '500px' }}><p>Loading...</p></div> :
+                            <Skills skills={skills} fetching={skillsFetching}/>
+                        }
                         {isFetching ? <div style={{ margin: '0 auto', width: '500px' }}><p>Loading...</p></div> :
                             <Experience experience={sortedExperience}/>
-                        }
-                        {skillsFetching ? <div style={{ margin: '0 auto', width: '500px' }}><p>Loading...</p></div> :
-                            <Skills skills={sortedSkills} fetching={skillsFetching}/>
                         }
                         {eduFetching ? <div style={{ margin: '0 auto', width: '500px' }}><p>Loading...</p></div> :
                             <Education education={sortedEdu}/>

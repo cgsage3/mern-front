@@ -12,7 +12,7 @@ const Skills = (props)=> {
                 <div className="flex-cont">
                     {skills.map((item, index) => {
                         return <div key={item.category} className="skill-right">
-                            <h3 className="skill-title">{item.category} : </h3><p>{item.skills}</p>
+                            <h3 className="skill-title">{item.category}: </h3><p>{item.skills}</p>
                         </div>;
                     })}
                 </div>

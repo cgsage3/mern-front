@@ -107,9 +107,7 @@ const AppRoutes = () => {
                     exact={true}
                     path="/resumes"
                     element={
-                        <PrivateRoute>
-                            <Resumes />
-                        </PrivateRoute>
+<Resumes />
                     }
                 />
                 <Route

@@ -19,6 +19,7 @@ const Login = () => {
 	const login = async (payload) => {
 		try {
 			const response = await apiRequest.post(`login`, payload);
+			console.log(payload);
 			dispatch(AuthActions.setAuth(response.data.data));
 		} catch (error) {
 			showToast(error?.response?.data?.message, 'error');
